@@ -99,6 +99,7 @@
     @apply scale-105;
     box-shadow: var(--shadow-glow);
     background: var(--color-vibrant-glow);
+    color: white;
   }
 
   .btn-vibrant:active {

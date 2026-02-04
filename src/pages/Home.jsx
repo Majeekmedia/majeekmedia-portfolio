@@ -129,7 +129,7 @@ export default function Home() {
                   href="https://twitter.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-black/5 hover:bg-vibrant text-black hover:text-white transition-all duration-200"
+                  className="p-3 rounded-full bg-black/5 hover:bg-blue-50 text-black hover:text-vibrant transition-all duration-200"
                   aria-label="Twitter"
                 >
                   <Twitter size={20} />
@@ -138,7 +138,7 @@ export default function Home() {
                   href="https://facebook.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-black/5 hover:bg-vibrant text-black hover:text-white transition-all duration-200"
+                  className="p-3 rounded-full bg-black/5 hover:bg-blue-50 text-black hover:text-vibrant transition-all duration-200"
                   aria-label="Facebook"
                 >
                   <Facebook size={20} />
@@ -147,7 +147,7 @@ export default function Home() {
                   href="https://instagram.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-black/5 hover:bg-vibrant text-black hover:text-white transition-all duration-200"
+                  className="p-3 rounded-full bg-black/5 hover:bg-blue-50 text-black hover:text-vibrant transition-all duration-200"
                   aria-label="Instagram"
                 >
                   <Instagram size={20} />
@@ -156,7 +156,7 @@ export default function Home() {
                   href="https://linkedin.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-black/5 hover:bg-vibrant text-black hover:text-white transition-all duration-200"
+                  className="p-3 rounded-full bg-black/5 hover:bg-blue-50 text-black hover:text-vibrant transition-all duration-200"
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={20} />

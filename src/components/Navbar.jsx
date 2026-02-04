@@ -24,7 +24,7 @@ export default function Navbar() {
   );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 glass">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black">
       <Container className="py-4">
         <div className="flex items-center justify-between gap-3">
           <Link to="/" className="flex items-center gap-2 min-w-0">
