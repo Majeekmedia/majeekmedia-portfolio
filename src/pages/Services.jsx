@@ -14,13 +14,13 @@ function Tier({ name, bullets, price, Icon }) {
 
         <div className="min-w-0">
           <h3 className="text-lg font-semibold text-black">{name}</h3>
-          {price ? <p className="mt-2 text-sm text-gray-600">{price}</p> : null}
+          {price ? <p className="mt-2 text-sm text-gray-700">{price}</p> : null}
         </div>
       </div>
 
       <ul className="mt-4 space-y-2 text-sm">
         {bullets.map((b) => (
-          <li key={b} className="flex gap-2 text-gray-700">
+          <li key={b} className="flex gap-2 text-gray-800">
             <span className="mt-2 h-1.5 w-1.5 rounded-full bg-vibrant" />
             <span>{b}</span>
           </li>
@@ -32,7 +32,7 @@ function Tier({ name, bullets, price, Icon }) {
 
 function Addon({ Icon, title }) {
   return (
-    <li className="flex items-start gap-2 text-sm text-gray-700">
+    <li className="flex items-start gap-2 text-sm text-gray-800">
       <Icon size={18} className="text-vibrant mt-0.5" />
       <span>{title}</span>
     </li>

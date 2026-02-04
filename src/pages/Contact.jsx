@@ -16,7 +16,7 @@ function OptionCard({ Icon, title, children }) {
         </div>
         <div className="min-w-0">
           <div className="text-sm font-semibold text-black">{title}</div>
-          <div className="mt-1 text-sm text-gray-700">{children}</div>
+          <div className="mt-1 text-sm text-gray-800">{children}</div>
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@ export default function Contact() {
 
                 <form className="mt-6 space-y-4" onSubmit={onSubmit}>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Name</label>
+                    <label className="text-sm font-semibold text-gray-900">Name</label>
                     <input
                       value={form.name}
                       onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
@@ -101,7 +101,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Email</label>
+                    <label className="text-sm font-semibold text-gray-900">Email</label>
                     <input
                       value={form.email}
                       onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
@@ -113,7 +113,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Message</label>
+                    <label className="text-sm font-semibold text-gray-900">Message</label>
                     <textarea
                       value={form.message}
                       onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}

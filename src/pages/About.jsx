@@ -11,8 +11,8 @@ function DetailRow({ Icon, label, value }) {
         <Icon size={18} className="text-vibrant" />
       </div>
       <div>
-        <div className="text-xs text-gray-500">{label}</div>
-        <div className="mt-1 text-sm font-medium text-black">{value}</div>
+        <div className="text-xs text-gray-600">{label}</div>
+        <div className="mt-1 text-sm font-bold text-black">{value}</div>
       </div>
     </div>
   );
@@ -45,7 +45,7 @@ export default function About() {
                     </h2>
                   </div>
 
-                  <p className="mt-4 text-gray-700">
+                  <p className="mt-4 text-gray-800">
                     Majeek Media is led by Preye Tekenah, a web developer with over 3 years experience
                     building custom web applications.
                   </p>
@@ -73,7 +73,7 @@ export default function About() {
                     className="w-full h-64 object-cover"
                   />
                 </div>
-                <p className="mt-4 text-sm text-gray-600">
+                <p className="mt-4 text-sm text-gray-700">
                   Founder &amp; Lead Developer at Majeek Media.
                 </p>
               </div>
