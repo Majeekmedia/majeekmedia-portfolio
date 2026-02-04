@@ -2,7 +2,7 @@ import Container from "../components/Container.jsx";
 import { ButtonLink } from "../components/Button.jsx";
 import Seo from "../components/Seo.jsx";
 import Reveal from "../components/Reveal.jsx";
-import { Code, Database, Server, Wrench } from "lucide-react";
+import { Code, Database, Server, Wrench, Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
 
 function SkillCategory({ title, skills, highlight }) {
   return (
@@ -22,7 +22,7 @@ function SkillCategory({ title, skills, highlight }) {
         {skills.map((skill) => (
           <span
             key={skill}
-            className="px-3 py-1 rounded-full text-sm font-medium bg-black/5 text-black hover:bg-vibrant hover:text-black transition-all duration-200"
+            className="px-3 py-1 rounded-full text-sm font-medium bg-black/5 text-black hover:bg-vibrant hover:text-white transition-all duration-200"
           >
             {skill}
           </span>
@@ -68,10 +68,13 @@ export default function Home() {
                 Building scalable web platforms, custom dashboards, and MVPs for businesses and startups using modern technology stacks.
               </p>
 
-              {/* Tech Stack */}
+              {/* Tech Stack - Updated with white background for visibility */}
               <div className="flex flex-wrap gap-2">
                 {["React", "Supabase", "Node.js", "Tailwind CSS"].map((tech) => (
-                  <span key={tech} className="skill-badge">
+                  <span 
+                    key={tech} 
+                    className="px-4 py-2 rounded-lg bg-white/95 text-black font-medium text-sm hover:bg-vibrant hover:text-white transition-all duration-200"
+                  >
                     {tech}
                   </span>
                 ))}
@@ -97,7 +100,7 @@ export default function Home() {
                   className="w-full max-w-md mx-auto lg:max-w-full rounded-3xl"
                 />
               </div>
-              {/* Glow effect behind image */}
+              {/* Glow effect behind image - now blue */}
               <div className="absolute inset-0 bg-gradient-to-br from-vibrant/20 to-transparent blur-3xl -z-10"></div>
             </div>
           </div>
@@ -119,6 +122,47 @@ export default function Home() {
                 scalable platforms tailored to business needs. Every project is an opportunity 
                 to blend creativity with technical excellence.
               </p>
+              
+              {/* Social Media Icons */}
+              <div className="flex justify-center gap-4 mb-8">
+                <a 
+                  href="https://twitter.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-black/5 hover:bg-vibrant text-black hover:text-white transition-all duration-200"
+                  aria-label="Twitter"
+                >
+                  <Twitter size={20} />
+                </a>
+                <a 
+                  href="https://facebook.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-black/5 hover:bg-vibrant text-black hover:text-white transition-all duration-200"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={20} />
+                </a>
+                <a 
+                  href="https://instagram.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-black/5 hover:bg-vibrant text-black hover:text-white transition-all duration-200"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={20} />
+                </a>
+                <a 
+                  href="https://linkedin.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-black/5 hover:bg-vibrant text-black hover:text-white transition-all duration-200"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin size={20} />
+                </a>
+              </div>
+
               <ButtonLink to="/about" variant="vibrant">
                 Read More About Me
               </ButtonLink>
@@ -141,7 +185,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <SkillCategory
                 title="Front-End Development"
-                skills={["HTML", "CSS", "JavaScript", "React"]}
+                skills={["HTML", "CSS", "JavaScript", "React", "Responsive Design"]}
                 highlight="Front-End"
               />
               <SkillCategory

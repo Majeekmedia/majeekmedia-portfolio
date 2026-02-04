@@ -4,10 +4,10 @@
 
 @layer base {
   :root {
-    /* Vibrant Neon Green Accents - Primary Colors */
-    --color-vibrant: #beff55;
-    --color-vibrant-glow: #c4ff0d;
-    --color-vibrant-dark: #9edd00;
+    /* Vibrant Blue Accents - Primary Colors (Brand Blue) */
+    --color-vibrant: #1a73e8;
+    --color-vibrant-glow: #1557b0;
+    --color-vibrant-dark: #0d47a1;
 
     /* Dark Theme Colors */
     --color-dark-bg: #000000;
@@ -25,8 +25,8 @@
     --color-text-muted: #71717a;
 
     /* Shadow & Glow Effects */
-    --shadow-glow: 0 0 20px rgba(190, 255, 85, 0.3);
-    --shadow-glow-sm: 0 0 10px rgba(190, 255, 85, 0.2);
+    --shadow-glow: 0 0 20px rgba(26, 115, 232, 0.4);
+    --shadow-glow-sm: 0 0 10px rgba(26, 115, 232, 0.3);
     --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-card-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
 
@@ -169,7 +169,7 @@
 
   .text-vibrant-glow {
     color: var(--color-vibrant);
-    text-shadow: 0 0 20px rgba(190, 255, 85, 0.5);
+    text-shadow: 0 0 20px rgba(26, 115, 232, 0.6);
   }
 
   /* Smooth Reveal Animation */
