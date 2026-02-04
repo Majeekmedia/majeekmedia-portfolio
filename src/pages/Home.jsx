@@ -53,8 +53,8 @@ export default function Home() {
                 <span className="text-sm text-white/80">Available for Projects</span>
               </div>
 
-              {/* Main Headline */}
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight text-white">
+              {/* Main Headline - Reduced sizes */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
                 CODING WITH{" "}
                 <span className="text-vibrant-glow block mt-2">
                   A PASSION,
@@ -64,7 +64,7 @@ export default function Home() {
               </h1>
 
               {/* Tagline */}
-              <p className="text-xl text-white/70 leading-relaxed max-w-xl">
+              <p className="text-lg sm:text-xl text-white/70 leading-relaxed max-w-xl">
                 Building scalable web platforms, custom dashboards, and MVPs for businesses and startups using modern technology stacks.
               </p>
 
@@ -91,17 +91,25 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: Profile Image */}
-            <div className="relative">
-              <div className="relative z-10 float">
-                <img
-                  src="/images/hero/profile.png"
-                  alt="Majeek Media Developer"
-                  className="w-full max-w-md mx-auto lg:max-w-full rounded-3xl"
-                />
+            {/* Right: Profile Image with styled container */}
+            <div className="relative flex items-center justify-center">
+              {/* Styled container box for image */}
+              <div className="relative w-full max-w-lg">
+                {/* Background box with gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-vibrant/10 via-transparent to-vibrant/5 rounded-3xl border border-white/10 backdrop-blur-sm"></div>
+                
+                {/* Image container */}
+                <div className="relative z-10 p-8 flex items-center justify-center min-h-[500px]">
+                  <img
+                    src="/images/hero/profile.png"
+                    alt="Majeek Media Developer"
+                    className="w-full h-auto object-contain max-h-[480px] float"
+                  />
+                </div>
+                
+                {/* Glow effect behind box - now blue */}
+                <div className="absolute inset-0 bg-gradient-to-br from-vibrant/20 to-transparent blur-3xl -z-10"></div>
               </div>
-              {/* Glow effect behind image - now blue */}
-              <div className="absolute inset-0 bg-gradient-to-br from-vibrant/20 to-transparent blur-3xl -z-10"></div>
             </div>
           </div>
         </Container>
