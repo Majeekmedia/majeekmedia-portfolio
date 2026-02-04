@@ -134,7 +134,7 @@ export default function Home() {
               {/* Social Media Icons */}
               <div className="flex justify-center gap-4 mb-8">
                 <a 
-                  href="https://twitter.com" 
+                  href="http://x.com/majeekmedia" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="p-3 rounded-full bg-black/5 hover:bg-blue-50 text-black hover:text-vibrant transition-all duration-200"
@@ -143,7 +143,7 @@ export default function Home() {
                   <Twitter size={20} />
                 </a>
                 <a 
-                  href="https://facebook.com" 
+                  href="https://web.facebook.com/majeekmedia/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="p-3 rounded-full bg-black/5 hover:bg-blue-50 text-black hover:text-vibrant transition-all duration-200"
@@ -152,7 +152,7 @@ export default function Home() {
                   <Facebook size={20} />
                 </a>
                 <a 
-                  href="https://instagram.com" 
+                  href="https://www.instagram.com/preyetekenah/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="p-3 rounded-full bg-black/5 hover:bg-blue-50 text-black hover:text-vibrant transition-all duration-200"
@@ -161,7 +161,7 @@ export default function Home() {
                   <Instagram size={20} />
                 </a>
                 <a 
-                  href="https://linkedin.com" 
+                  href="https://www.linkedin.com/in/preye-tekenah-a5799313a/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="p-3 rounded-full bg-black/5 hover:bg-blue-50 text-black hover:text-vibrant transition-all duration-200"
