@@ -3,8 +3,9 @@ import Container from "../components/Container.jsx";
 import Seo from "../components/Seo.jsx";
 import Reveal from "../components/Reveal.jsx";
 import { ButtonLink } from "../components/Button.jsx";
+import ImageGallery from "../components/ImageGallery.jsx";
 import { projects } from "../data/projects.js";
-import { ListChecks, UserCog, Target, Cpu, ShieldAlert, ExternalLink, Images } from "lucide-react";
+import { ListChecks, UserCog, Target, Cpu, ShieldAlert, ExternalLink } from "lucide-react";
 
 function SectionLabel({ Icon, title }) {
   return (
@@ -25,51 +26,6 @@ function BulletList({ items }) {
         </li>
       ))}
     </ul>
-  );
-}
-
-function ScreenshotStrip({ images = [], title }) {
-  if (!images.length) {
-    return (
-      <div className="rounded-xl border border-gray-200 bg-gray-50 p-6">
-        <div className="flex items-center gap-2 text-sm text-black">
-          <Images size={18} className="text-vibrant" />
-          <span>Screenshots coming soon</span>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="rounded-xl border border-gray-200 overflow-hidden bg-gray-50">
-      <div className="max-w-full overflow-x-auto overscroll-x-contain">
-        <div className="flex flex-nowrap gap-3 p-3 snap-x snap-mandatory">
-          {images.map((src, idx) => (
-            <a
-              key={src}
-              href={src}
-              target="_blank"
-              rel="noreferrer"
-              className="snap-start shrink-0 block"
-              title={`Open screenshot ${idx + 1} for ${title}`}
-            >
-              <img
-                src={src}
-                alt={`${title} screenshot ${idx + 1}`}
-                loading="lazy"
-                decoding="async"
-                className="
-                  block h-44 sm:h-48 object-cover rounded-lg
-                  border border-gray-200 bg-white shadow-sm
-                  w-[78vw] max-w-[360px]
-                  hover:shadow-md transition-shadow
-                "
-              />
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -97,10 +53,7 @@ function ProjectCard({ p }) {
       </div>
 
       <div className="mt-5">
-        <ScreenshotStrip images={p.images} title={p.title} />
-        <p className="mt-2 text-xs text-gray-600">
-          Tip: click a screenshot to open full size.
-        </p>
+        <ImageGallery images={p.images} title={p.title} />
       </div>
 
       {p.summary ? (
