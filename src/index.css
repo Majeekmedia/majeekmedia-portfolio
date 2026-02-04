@@ -87,6 +87,23 @@
 }
 
 @layer components {
+  /* Section Spacing - Adjust these values to control all section padding */
+  .section-padding {
+    @apply py-12;  /* Change this value: py-8 (small), py-12 (medium), py-16 (large) */
+  }
+
+  .section-sm {
+    @apply py-8 sm:py-12;
+  }
+
+  .section-md {
+    @apply py-12 sm:py-16;
+  }
+
+  .section-lg {
+    @apply py-16 sm:py-20;
+  }
+
   /* Vibrant Button Styles */
   .btn-vibrant {
     @apply px-6 py-3 rounded-full font-semibold transition-all duration-300;
