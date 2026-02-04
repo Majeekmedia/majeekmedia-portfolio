@@ -36,8 +36,8 @@ export const projects = [
   type: "Internal project",
   summary:
     "A fast, SEO-friendly portfolio site built to convert visitors into leads and showcase real project experience.",
-  features: ["Responsive UI", "Dark mode toggle", "Supabase lead capture form"],
-  tech: ["React", "Vite", "Tailwind CSS", "Supabase", "Netlify"],
+  features: ["Responsive UI", "Contact form with EmailJS", "Modern design system", "SEO optimized"],
+  tech: ["React", "Vite", "Tailwind CSS", "EmailJS"],
   demoUrl: "https://majeekmedia.com",
   images: [
     "/projects/majeek/majeek1.jpg",
