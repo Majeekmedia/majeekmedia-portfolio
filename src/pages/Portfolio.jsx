@@ -32,82 +32,115 @@ function BulletList({ items }) {
 function ProjectCard({ p }) {
   return (
     <div className="card-light">
-      <div className="flex items-start justify-between gap-4">
-        <div className="min-w-0">
-          <h3 className="text-xl font-bold text-black">{p.title}</h3>
-          <p className="text-sm text-vibrant font-medium">{p.type}</p>
-        </div>
+      {/* Mobile/Tablet: Show title and demo button at top */}
+      <div className="lg:hidden">
+        <div className="flex items-start justify-between gap-4 mb-5">
+          <div className="min-w-0">
+            <h3 className="text-xl font-bold text-black">{p.title}</h3>
+            <p className="text-sm text-vibrant font-medium">{p.type}</p>
+          </div>
 
-        {p.demoUrl ? (
-          <a
-            href={p.demoUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border-2 border-vibrant/20 bg-white px-3 py-2 text-sm font-semibold
-                       text-vibrant hover:bg-vibrant/5 transition-all"
-          >
-            <ExternalLink size={16} />
-            View Demo
-          </a>
-        ) : null}
+          {p.demoUrl ? (
+            <a
+              href={p.demoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-vibrant/20 bg-white px-3 py-2 text-sm font-semibold
+                         text-vibrant hover:bg-vibrant/5 transition-all flex-shrink-0"
+            >
+              <ExternalLink size={16} />
+              View Demo
+            </a>
+          ) : null}
+        </div>
       </div>
 
-      <div className="mt-5">
-        <ImageGallery images={p.images} title={p.title} />
+      {/* Desktop: 2-column layout */}
+      <div className="grid lg:grid-cols-2 gap-8">
+        {/* Left Column: Image Gallery */}
+        <div>
+          <ImageGallery images={p.images} title={p.title} />
+        </div>
+
+        {/* Right Column: Project Info */}
+        <div className="space-y-5">
+          {/* Desktop: Title and demo button */}
+          <div className="hidden lg:block">
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <div className="min-w-0">
+                <h3 className="text-2xl font-bold text-black">{p.title}</h3>
+                <p className="text-sm text-vibrant font-medium mt-1">{p.type}</p>
+              </div>
+
+              {p.demoUrl ? (
+                <a
+                  href={p.demoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border-2 border-vibrant/20 bg-white px-3 py-2 text-sm font-semibold
+                             text-vibrant hover:bg-vibrant/5 transition-all flex-shrink-0"
+                >
+                  <ExternalLink size={16} />
+                  View Demo
+                </a>
+              ) : null}
+            </div>
+          </div>
+
+          {p.summary ? (
+            <p className="text-black leading-relaxed">{p.summary}</p>
+          ) : null}
+
+          {p.features?.length ? (
+            <div>
+              <SectionLabel Icon={ListChecks} title="Features" />
+              <BulletList items={p.features} />
+            </div>
+          ) : null}
+
+          {p.role?.length ? (
+            <div>
+              <SectionLabel Icon={UserCog} title="Role" />
+              <BulletList items={p.role} />
+            </div>
+          ) : null}
+
+          {p.outcome ? (
+            <div>
+              <SectionLabel Icon={Target} title="Outcome" />
+              <p className="mt-2 text-sm text-black">{p.outcome}</p>
+            </div>
+          ) : null}
+
+          {p.tech?.length ? (
+            <div>
+              <SectionLabel Icon={Cpu} title="Tech Stack" />
+              <div className="mt-2 flex flex-wrap gap-2">
+                {p.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
+                               bg-vibrant/5 text-vibrant border border-vibrant/20"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {p.note ? (
+            <div className="rounded-xl border border-vibrant/20 bg-vibrant/5 p-4">
+              <div className="flex items-start gap-2">
+                <ShieldAlert size={18} className="text-vibrant mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-black">
+                  <span className="font-medium">Note:</span> {p.note}
+                </p>
+              </div>
+            </div>
+          ) : null}
+        </div>
       </div>
-
-      {p.summary ? (
-        <p className="mt-4 text-black leading-relaxed">{p.summary}</p>
-      ) : null}
-
-      {p.features?.length ? (
-        <div className="mt-5">
-          <SectionLabel Icon={ListChecks} title="Features" />
-          <BulletList items={p.features} />
-        </div>
-      ) : null}
-
-      {p.role?.length ? (
-        <div className="mt-5">
-          <SectionLabel Icon={UserCog} title="Role" />
-          <BulletList items={p.role} />
-        </div>
-      ) : null}
-
-      {p.outcome ? (
-        <div className="mt-5">
-          <SectionLabel Icon={Target} title="Outcome" />
-          <p className="mt-2 text-sm text-black">{p.outcome}</p>
-        </div>
-      ) : null}
-
-      {p.tech?.length ? (
-        <div className="mt-5">
-          <SectionLabel Icon={Cpu} title="Tech Stack" />
-          <div className="mt-2 flex flex-wrap gap-2">
-            {p.tech.map((tech) => (
-              <span
-                key={tech}
-                className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
-                           bg-vibrant/5 text-vibrant border border-vibrant/20"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-      ) : null}
-
-      {p.note ? (
-        <div className="mt-5 rounded-xl border border-vibrant/20 bg-vibrant/5 p-4">
-          <div className="flex items-start gap-2">
-            <ShieldAlert size={18} className="text-vibrant mt-0.5 flex-shrink-0" />
-            <p className="text-sm text-black">
-              <span className="font-medium">Note:</span> {p.note}
-            </p>
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }
