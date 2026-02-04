@@ -30,8 +30,8 @@ function ProcessStep({ number, title, description }) {
         </div>
       </div>
       <div>
-        <h4 className="text-lg font-bold text-black mb-2">{title}</h4>
-        <p className="text-gray-800">{description}</p>
+        <h4 className="text-lg font-bold text-white mb-2">{title}</h4>
+        <p className="text-white/80">{description}</p>
       </div>
     </div>
   );
