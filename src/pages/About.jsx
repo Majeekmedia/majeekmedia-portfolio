@@ -90,18 +90,18 @@ export default function About() {
                   Hi, I'm <span className="text-vibrant">Preye Tekenah</span>
                 </h2>
                 <div className="space-y-4 text-black leading-relaxed">
-                  <p className="text-lg">
+                  <p className="text-lg text-black">
                     I'm a <strong>full-stack developer</strong> specializing in building modern web applications 
                     that solve real-world problems. With expertise spanning front-end frameworks 
                     like React to robust back-end solutions using Node.js and Supabase, I create 
                     scalable platforms tailored to business needs.
                   </p>
-                  <p>
+                  <p className="text-black">
                     Every project is an opportunity to blend <strong>creativity with technical excellence</strong>. 
                     I focus on writing clean, maintainable code and building systems designed to grow 
                     with your business—not hold it back.
                   </p>
-                  <p>
+                  <p className="text-black">
                     Based in <strong>Nigeria</strong>, I work remotely with startups and businesses worldwide, 
                     turning complex ideas into functional, user-friendly platforms using modern technology stacks.
                   </p>
@@ -222,7 +222,7 @@ export default function About() {
               <p className="text-lg text-black mb-8">
                 Have a project in mind? I'd love to hear about it and explore how we can work together.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-wrap justify-center items-center gap-4">
                 <ButtonLink to="/contact" variant="vibrant" className="pulse-glow">
                   Get in Touch
                 </ButtonLink>
