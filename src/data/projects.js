@@ -29,6 +29,36 @@ export const projects = [
     tech: ["React", "Vite", "Tailwind CSS", "Supabase", "PostgreSQL", "Lucide Icons"],
   },
   {
+    title: "MajeekHub - Music Career Management Platform",
+    type: "SaaS Product",
+    summary:
+      "An all-in-one career management system for music artists and talent managers. Helps organize careers, plan music releases, manage promotions, create professional Electronic Press Kits (EPKs), and generate smart music links with click tracking.",
+    features: [
+      "Release management for singles, EPs, and albums with metadata tracking",
+      "Smart music links with automatic platform routing and click analytics",
+      "Professional Electronic Press Kit (EPK) builder",
+      "Artist profile management with social media integration",
+      "Career management tools (notes, revenue tracking, tasks)",
+      "Subscription & billing with Stripe and Paystack integration",
+      "Monorepo architecture ready for mobile app expansion",
+      "Cross-platform business logic for React Native compatibility"
+    ],
+    role: [
+      "Full-stack development with TypeScript",
+      "Monorepo architecture setup",
+      "Payment integration (Stripe + Paystack)",
+      "UI/UX design and implementation"
+    ],
+    outcome: "Production-ready SaaS platform serving music artists and talent managers with dual payment gateway support",
+    demoUrl: "https://majeekhub.netlify.app",
+    images: [
+      "/projects/majeekhub/dashboard.png",
+      "/projects/majeekhub/home1.png",
+      "/projects/majeekhub/home2.png",
+    ],
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "Stripe", "Paystack"],
+  },
+  {
     title: "E-commerce Platform",
     type: "Collaborative project",
     summary:
