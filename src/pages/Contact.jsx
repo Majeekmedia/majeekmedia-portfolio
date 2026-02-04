@@ -92,7 +92,7 @@ export default function Contact() {
     setStatus({ state: "success", message: "Message sent successfully. We'll get back to you shortly." });
   }
 
-  const email = "majeekmediaconcept@gmail.com";
+  const email = "contact@majeekmedia.com";
   const whatsappLink = "https://wa.me/2349038787850";
 
   return (
