@@ -138,7 +138,10 @@ export default function Contact() {
                       value={form.name}
                       onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                       className="mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm outline-none
-                                 focus:ring-2 focus:ring-vibrant text-black transition-all"
+                                 focus:ring-2 focus:ring-vibrant text-black transition-all
+                                 [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:text-black
+                                 [&:-webkit-autofill]:[-webkit-text-fill-color:black]
+                                 [&:-webkit-autofill]:[-webkit-box-shadow:0_0_0_1000px_white_inset]"
                       placeholder="Your name"
                       autoComplete="name"
                     />
@@ -150,7 +153,10 @@ export default function Contact() {
                       value={form.email}
                       onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                       className="mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm outline-none
-                                 focus:ring-2 focus:ring-vibrant text-black transition-all"
+                                 focus:ring-2 focus:ring-vibrant text-black transition-all
+                                 [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:text-black
+                                 [&:-webkit-autofill]:[-webkit-text-fill-color:black]
+                                 [&:-webkit-autofill]:[-webkit-box-shadow:0_0_0_1000px_white_inset]"
                       placeholder="you@company.com"
                       autoComplete="email"
                     />
