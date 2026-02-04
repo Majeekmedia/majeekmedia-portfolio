@@ -3,21 +3,16 @@ import { NavLink, Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 import Container from "./Container.jsx";
-import ThemeToggle from "./ThemeToggle.jsx";
-import { useTheme } from "../hooks/useTheme.js";
 
 const navLinkClass = ({ isActive }) =>
-  `text-sm font-medium transition ${
+  `text-sm font-medium transition-colors duration-200 ${
     isActive
-      ? "text-accent-700 dark:text-accent-50"
-      : "text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+      ? "text-vibrant"
+      : "text-white/80 hover:text-vibrant"
   }`;
 
 export default function Navbar() {
-  const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
-
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   const NavItems = ({ onClick }) => (
     <>
@@ -29,39 +24,36 @@ export default function Navbar() {
   );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur dark:border-slate-900 dark:bg-slate-950/70">
+    <header className="sticky top-0 z-50 border-b border-white/10 glass">
       <Container className="py-4">
         <div className="flex items-center justify-between gap-3">
           <Link to="/" className="flex items-center gap-2 min-w-0">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white ring-1 ring-slate-200 p-1 dark:bg-slate-50 dark:ring-slate-800">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-vibrant p-1">
               <img
                 src="/logo.png"
                 alt="Majeek Media"
                 className="h-7 w-7 rounded-full object-cover"
               />
             </span>
-            <span className="font-semibold tracking-tight text-slate-900 dark:text-white truncate">
+            <span className="font-bold tracking-tight text-white truncate">
               Majeek Media
             </span>
           </Link>
 
           {/* Desktop */}
-          <div className="hidden md:flex items-center gap-4">
-            <nav className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-6">
+            <nav className="flex items-center gap-6">
               <NavItems />
             </nav>
-            <ThemeToggle theme={theme} onToggle={toggleTheme} />
           </div>
 
           {/* Mobile */}
           <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle theme={theme} onToggle={toggleTheme} />
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white p-2
-                         text-slate-700 hover:bg-slate-50 transition
-                         dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900"
+              className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/5 p-2
+                         text-white hover:bg-white/10 transition"
               aria-label="Toggle menu"
             >
               {open ? <X size={18} /> : <Menu size={18} />}
@@ -71,7 +63,7 @@ export default function Navbar() {
 
         {/* Mobile panel */}
         {open ? (
-          <div className="md:hidden mt-4 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-950">
+          <div className="md:hidden mt-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4">
             <nav className="flex flex-col gap-3">
               <NavItems onClick={() => setOpen(false)} />
             </nav>

@@ -2,20 +2,20 @@
 
 ## Phase 1: Design System & UI Improvements
 
-- [ ] Update hero section with personal image placement
-- [ ] Implement new color scheme matching reference (vibrant green accents on
+- [x] Update hero section with personal image placement
+- [x] Implement new color scheme matching reference (vibrant green accents on
       dark background)
-- [ ] Update typography to match reference style (bold, modern headings)
-- [ ] Add smooth animations and micro-interactions
-- [ ] Improve button styles with vibrant accent colors
+- [x] Update typography to match reference style (bold, modern headings)
+- [x] Add smooth animations and micro-interactions
+- [x] Improve button styles with vibrant accent colors
 
 ## Phase 2: Homepage Restructure
 
-- [ ] Hero section with personal image (right side)
-- [ ] Skills/specialization section with icon cards
-- [ ] Projects preview section (single thumbnail display)
+- [x] Hero section with personal image (right side)
+- [x] Skills/specialization section with icon cards
+- [/] Projects preview section (single thumbnail display)
 - [ ] Accomplishments/testimonials section
-- [ ] CTA section with contact form integration
+- [x] CTA section with contact form integration
 
 ## Phase 3: Projects Display Overhaul
 

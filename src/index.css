@@ -2,64 +2,294 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light;
-}
-
-html, body {
-  height: 100%;
-}
-
-body {
-  @apply bg-white text-slate-900 antialiased;
-}
-
-.dark body {
-  @apply bg-slate-950 text-slate-100;
-}
-
-a {
-  @apply text-slate-900;
-}
-
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
-    @apply text-slate-900 dark:text-white;
+  :root {
+    /* Vibrant Neon Green Accents - Primary Colors */
+    --color-vibrant: #beff55;
+    --color-vibrant-glow: #c4ff0d;
+    --color-vibrant-dark: #9edd00;
+
+    /* Dark Theme Colors */
+    --color-dark-bg: #000000;
+    --color-dark-surface: #0a0a0a;
+    --color-dark-card: #111111;
+    --color-dark-border: #1a1a1a;
+
+    /* Light Theme Colors (for cards on dark bg) */
+    --color-light-card: #ffffff;
+    --color-light-border: #e5e7eb;
+
+    /* Text Colors */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #a1a1aa;
+    --color-text-muted: #71717a;
+
+    /* Shadow & Glow Effects */
+    --shadow-glow: 0 0 20px rgba(190, 255, 85, 0.3);
+    --shadow-glow-sm: 0 0 10px rgba(190, 255, 85, 0.2);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-card-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html, body {
+    height: 100%;
   }
 
   body {
-    @apply bg-white text-slate-900 antialiased;
+    @apply antialiased;
+    background: var(--color-dark-bg);
+    color: var(--color-text-primary);
+    font-family:
+      "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
   }
 
-  .dark body {
-    @apply bg-slate-950 text-slate-100;
+  /* Typography Enhancements */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
   }
 
-  /* Make common text elements readable in dark mode */
-  p, li, dd, label {
-    @apply text-slate-700 dark:text-slate-200;
+  h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl;
+    line-height: 1.1;
   }
 
-  /* Muted text */
-  small, dt {
-    @apply text-slate-500 dark:text-slate-400;
+  h2 {
+    @apply text-3xl sm:text-4xl lg:text-5xl;
+    line-height: 1.2;
   }
 
-  a, span {
-    @apply text-slate-900 dark:text-slate-100;
+  h3 {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  p {
+    @apply leading-relaxed;
+    color: var(--color-text-secondary);
+  }
+
+  a {
+    @apply transition-all duration-200;
+    color: var(--color-text-primary);
+  }
+
+  a:hover {
+    color: var(--color-vibrant);
   }
 }
+
 @layer components {
+  /* Vibrant Button Styles */
+  .btn-vibrant {
+    @apply px-6 py-3 rounded-full font-semibold transition-all duration-300;
+    background: var(--color-vibrant);
+    color: var(--color-dark-bg);
+    box-shadow: var(--shadow-glow-sm);
+  }
+
+  .btn-vibrant:hover {
+    @apply scale-105;
+    box-shadow: var(--shadow-glow);
+    background: var(--color-vibrant-glow);
+  }
+
+  .btn-vibrant:active {
+    @apply scale-95;
+  }
+
+  .btn-outline-vibrant {
+    @apply px-6 py-3 rounded-full font-semibold transition-all duration-300;
+    border: 2px solid var(--color-vibrant);
+    color: var(--color-vibrant);
+    background: transparent;
+  }
+
+  .btn-outline-vibrant:hover {
+    background: var(--color-vibrant);
+    color: var(--color-dark-bg);
+    box-shadow: var(--shadow-glow-sm);
+  }
+
+  /* Light Card on Dark Background */
+  .card-light {
+    @apply rounded-2xl p-6 transition-all duration-300;
+    background: var(--color-light-card);
+    border: 1px solid var(--color-light-border);
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-light:hover {
+    @apply -translate-y-1;
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Dark Card */
+  .card-dark {
+    @apply rounded-2xl p-6 transition-all duration-300;
+    background: var(--color-dark-card);
+    border: 1px solid var(--color-dark-border);
+  }
+
+  .card-dark:hover {
+    @apply -translate-y-1;
+    border-color: var(--color-vibrant);
+  }
+
+  /* Glassmorphism Effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Text Gradient for Headings */
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--color-text-primary) 0%,
+      var(--color-text-secondary) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Vibrant Text Highlight */
+  .text-vibrant {
+    color: var(--color-vibrant);
+  }
+
+  .text-vibrant-glow {
+    color: var(--color-vibrant);
+    text-shadow: 0 0 20px rgba(190, 255, 85, 0.5);
+  }
+
+  /* Smooth Reveal Animation */
+  .reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-700;
+  }
+
+  .reveal.active {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Pulse Animation for CTAs */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 10px rgba(190, 255, 85, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(190, 255, 85, 0.4);
+    }
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Floating Animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Section Spacing */
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .section-sm {
+    @apply py-12 sm:py-16;
+  }
+
+  /* Container Max Width */
+  .container-custom {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1280px;
+  }
+
+  /* Muted Text */
   .muted {
-    @apply text-slate-600 dark:text-slate-300;
+    color: var(--color-text-muted);
   }
 
-  div {
-    @apply text-slate-600 dark:text-slate-300;
-  }
-
+  /* Surface (for compatibility) */
   .surface {
-    @apply bg-white border border-slate-100 shadow-sm
-           dark:bg-slate-950 dark:border-slate-900;
+    @apply card-dark;
+  }
+
+  /* Skill Badge */
+  .skill-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+      transition-all duration-200;
+    background: var(--color-dark-card);
+    color: var(--color-vibrant);
+    border: 1px solid var(--color-dark-border);
+  }
+
+  .skill-badge:hover {
+    background: var(--color-vibrant);
+    color: var(--color-dark-bg);
+    border-color: var(--color-vibrant);
+  }
+
+  /* Project Thumbnail */
+  .project-thumbnail {
+    @apply rounded-xl overflow-hidden border transition-all duration-300;
+    border-color: var(--color-light-border);
+    aspect-ratio: 16 / 10;
+  }
+
+  .project-thumbnail:hover {
+    @apply scale-105;
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Accent Dot */
+  .accent-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+    background: var(--color-vibrant);
+    box-shadow: var(--shadow-glow-sm);
+  }
+}
+
+@layer utilities {
+  /* Custom Scrollbar */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: var(--color-dark-surface);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: var(--color-dark-border);
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: var(--color-vibrant);
   }
 }

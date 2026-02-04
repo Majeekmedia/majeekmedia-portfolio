@@ -1,22 +1,34 @@
 import { Link } from "react-router-dom";
 
 const base =
-  "inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold " +
-  "transition focus:outline-none focus:ring-2 focus:ring-accent-600 " +
-  "focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-950";
+  "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold " +
+  "transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2";
 
 function getStyles(variant, disabled) {
-  if (variant === "primary") {
+  if (variant === "vibrant") {
     return (
-      "bg-accent-600 text-white hover:bg-accent-700 shadow-soft " +
-      (disabled ? "opacity-60 cursor-not-allowed hover:bg-accent-600" : "")
+      "btn-vibrant " +
+      (disabled ? "opacity-60 cursor-not-allowed hover:scale-100" : "")
     );
   }
 
-  // secondary
+  if (variant === "outline-vibrant") {
+    return (
+      "btn-outline-vibrant " +
+      (disabled ? "opacity-60 cursor-not-allowed" : "")
+    );
+  }
+
+  if (variant === "primary") {
+    return (
+      "btn-vibrant " +
+      (disabled ? "opacity-60 cursor-not-allowed hover:scale-100" : "")
+    );
+  }
+
+  // secondary (dark card style)
   return (
-    "border border-slate-200 bg-white text-slate-900 hover:bg-slate-50 " +
-    "dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900 " +
+    "bg-transparent border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/40 " +
     (disabled ? "opacity-60 cursor-not-allowed" : "")
   );
 }
