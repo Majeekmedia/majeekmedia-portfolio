@@ -16,7 +16,7 @@ function SkillCard({ Icon, title, items }) {
       </div>
       <ul className="space-y-2">
         {items.map((item) => (
-          <li key={item} className="flex items-start gap-2 text-gray-800">
+          <li key={item} className="flex items-start gap-2 text-black">
             <CheckCircle2 size={16} className="text-vibrant mt-1 flex-shrink-0" />
             <span>{item}</span>
           </li>
@@ -89,7 +89,7 @@ export default function About() {
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-6">
                   Hi, I'm <span className="text-vibrant">Preye Tekenah</span>
                 </h2>
-                <div className="space-y-4 text-gray-800 leading-relaxed">
+                <div className="space-y-4 text-black leading-relaxed">
                   <p className="text-lg">
                     I'm a <strong>full-stack developer</strong> specializing in building modern web applications 
                     that solve real-world problems. With expertise spanning front-end frameworks 
@@ -114,7 +114,7 @@ export default function About() {
                       <MapPin size={20} className="text-vibrant" />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-600">Location</div>
+                      <div className="text-sm text-gray-700">Location</div>
                       <div className="font-bold text-black">Nigeria</div>
                     </div>
                   </div>
@@ -123,7 +123,7 @@ export default function About() {
                       <Zap size={20} className="text-vibrant" />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-600">Availability</div>
+                      <div className="text-sm text-gray-700">Availability</div>
                       <div className="font-bold text-black">Remote Work</div>
                     </div>
                   </div>
@@ -161,7 +161,7 @@ export default function About() {
               <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-4">
                 Skills & <span className="text-vibrant">Expertise</span>
               </h2>
-              <p className="text-lg text-gray-800 max-w-2xl mx-auto">
+              <p className="text-lg text-black max-w-2xl mx-auto">
                 A comprehensive skill set to build complete, production-ready web applications.
               </p>
             </div>
@@ -219,7 +219,7 @@ export default function About() {
               <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-4">
                 Let's Build <span className="text-vibrant">Something Great</span>
               </h2>
-              <p className="text-lg text-gray-800 mb-8">
+              <p className="text-lg text-black mb-8">
                 Have a project in mind? I'd love to hear about it and explore how we can work together.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
