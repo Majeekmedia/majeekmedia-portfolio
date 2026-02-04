@@ -144,7 +144,7 @@ export default function About() {
               </h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-              <StatCard number="3+" label="Years Experience" />
+              <StatCard number="4+" label="Years Experience" />
               <StatCard number="20+" label="Projects Delivered" />
               <StatCard number="100%" label="Client Satisfaction" />
               <StatCard number="24/7" label="Support Available" />
