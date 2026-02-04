@@ -4,7 +4,7 @@ import Container from "../components/Container.jsx";
 import Seo from "../components/Seo.jsx";
 import Reveal from "../components/Reveal.jsx";
 import { Button } from "../components/Button.jsx";
-import { supabase } from "../lib/supabaseClient.js";
+import emailjs from '@emailjs/browser';
 import { Mail, MessageCircle, Clock, Zap, Target, Headphones, CheckCircle2 } from "lucide-react";
 
 function OptionCard({ Icon, title, children }) {
@@ -78,18 +78,29 @@ export default function Contact() {
 
     setStatus({ state: "loading", message: "" });
 
-    const { error } = await supabase.from("leads").insert([{ name, email, message }]);
+    try {
+      // Send email using EmailJS
+      await emailjs.send(
+        'service_nsb8gq9',      // Service ID
+        'template_iv95phv',     // Template ID
+        {
+          from_name: name,
+          user_email: email,
+          message: message,
+          sent_date: new Date().toLocaleString()
+        },
+        'L2gBGUmcgMb6baZiH'     // Public Key
+      );
 
-    if (error) {
+      setForm({ name: "", email: "", message: "" });
+      setStatus({ state: "success", message: "Message sent successfully. We'll get back to you shortly." });
+    } catch (error) {
+      console.error('EmailJS Error:', error);
       setStatus({
         state: "error",
         message: "Something went wrong. Please try again or contact us directly.",
       });
-      return;
     }
-
-    setForm({ name: "", email: "", message: "" });
-    setStatus({ state: "success", message: "Message sent successfully. We'll get back to you shortly." });
   }
 
   const email = "contact@majeekmedia.com";
