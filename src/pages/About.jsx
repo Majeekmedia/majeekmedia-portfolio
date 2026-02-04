@@ -32,7 +32,7 @@ export default function About() {
         subtitle="Professional, system-driven web development — built for maintainability and growth."
       />
 
-      <section className="pb-16 bg-white">
+      <section className="py-12 bg-white">
         <Container>
           <Reveal>
             <div className="grid gap-8 lg:grid-cols-3">

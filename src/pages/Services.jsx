@@ -53,7 +53,7 @@ export default function Services() {
         subtitle="Custom, system-driven development for startups and businesses — built to scale."
       />
 
-      <section className="pb-16 bg-white">
+      <section className="py-12 bg-white">
         <Container>
           <Reveal>
             <div className="grid gap-4 lg:grid-cols-3">

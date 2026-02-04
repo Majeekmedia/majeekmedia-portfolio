@@ -163,7 +163,7 @@ export default function Portfolio() {
         subtitle="Selected work presented as case summaries — focused on systems, workflows, and outcomes."
       />
 
-      <section className="pb-16">
+      <section className="py-12">
         <Container>
           <Reveal>
             <div className="grid gap-4 lg:grid-cols-2">

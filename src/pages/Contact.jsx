@@ -80,7 +80,7 @@ export default function Contact() {
         subtitle="Tell us what you’re building. We’ll respond with clear next steps."
       />
 
-      <section className="pb-16 bg-white">
+      <section className="py-12 bg-white">
         <Container>
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-2">
