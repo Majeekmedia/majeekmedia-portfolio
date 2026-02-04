@@ -26,9 +26,9 @@ function getStyles(variant, disabled) {
     );
   }
 
-  // secondary (dark card style)
+  // secondary (light background style)
   return (
-    "bg-transparent border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/40 " +
+    "bg-white border-2 border-vibrant/20 text-vibrant hover:bg-vibrant/5 hover:border-vibrant/40 " +
     (disabled ? "opacity-60 cursor-not-allowed" : "")
   );
 }
