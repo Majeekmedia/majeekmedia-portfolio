@@ -9,14 +9,14 @@ import { Mail, MessageCircle, Clock } from "lucide-react";
 
 function OptionCard({ Icon, title, children }) {
   return (
-    <div className="rounded-xl border border-slate-100 p-4 bg-white shadow-sm dark:border-slate-900 dark:bg-slate-950">
+    <div className="rounded-xl border border-gray-200 p-4 bg-white shadow-sm">
       <div className="flex items-start gap-3">
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-2 dark:border-slate-800 dark:bg-slate-900">
-          <Icon size={18} className="text-accent-700 dark:text-accent-50" />
+        <div className="rounded-lg border border-vibrant/20 bg-vibrant/5 p-2">
+          <Icon size={18} className="text-vibrant" />
         </div>
         <div className="min-w-0">
-          <div className="text-sm font-semibold text-slate-900 dark:text-white">{title}</div>
-          <div className="mt-1 text-sm text-slate-700 dark:text-slate-200">{children}</div>
+          <div className="text-sm font-semibold text-black">{title}</div>
+          <div className="mt-1 text-sm text-gray-700">{children}</div>
         </div>
       </div>
     </div>
@@ -80,48 +80,45 @@ export default function Contact() {
         subtitle="Tell us what you’re building. We’ll respond with clear next steps."
       />
 
-      <section className="pb-16">
+      <section className="pb-16 bg-white">
         <Container>
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-2">
-              <div className="rounded-2xl border border-slate-100 p-6 bg-white shadow-sm dark:border-slate-900 dark:bg-slate-950">
-                <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Send a message</h2>
+              <div className="card-light">
+                <h2 className="text-lg font-semibold text-black">Send a message</h2>
 
                 <form className="mt-6 space-y-4" onSubmit={onSubmit}>
                   <div>
-                    <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Name</label>
+                    <label className="text-sm font-medium text-gray-700">Name</label>
                     <input
                       value={form.name}
                       onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                      className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none
-                                 focus:ring-2 focus:ring-accent-600
-                                 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+                      className="mt-2 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none
+                                 focus:ring-2 focus:ring-vibrant text-black"
                       placeholder="Your name"
                       autoComplete="name"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Email</label>
+                    <label className="text-sm font-medium text-gray-700">Email</label>
                     <input
                       value={form.email}
                       onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                      className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none
-                                 focus:ring-2 focus:ring-accent-600
-                                 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+                      className="mt-2 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none
+                                 focus:ring-2 focus:ring-vibrant text-black"
                       placeholder="you@company.com"
                       autoComplete="email"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Message</label>
+                    <label className="text-sm font-medium text-gray-700">Message</label>
                     <textarea
                       value={form.message}
                       onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                      className="mt-2 w-full min-h-32 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none
-                                 focus:ring-2 focus:ring-accent-600
-                                 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+                      className="mt-2 w-full min-h-32 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none
+                                 focus:ring-2 focus:ring-vibrant text-black"
                       placeholder="Briefly describe what you want to build, timelines, and key requirements."
                     />
                   </div>
@@ -139,19 +136,19 @@ export default function Contact() {
                 </form>
               </div>
 
-              <div className="rounded-2xl border border-slate-100 p-6 bg-white shadow-sm dark:border-slate-900 dark:bg-slate-950">
-                <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Other contact options</h2>
+              <div className="card-light">
+                <h2 className="text-lg font-semibold text-black">Other contact options</h2>
 
                 <div className="mt-5 space-y-4">
                   <OptionCard Icon={Mail} title="Email">
-                    <a className="font-medium text-accent-700 dark:text-accent-50" href={`mailto:${email}`}>
+                    <a className="font-medium text-vibrant hover:underline" href={`mailto:${email}`}>
                       {email}
                     </a>
                   </OptionCard>
 
                   <OptionCard Icon={MessageCircle} title="WhatsApp">
                     <a
-                      className="font-medium text-accent-700 dark:text-accent-50"
+                      className="font-medium text-vibrant hover:underline"
                       href={whatsappLink}
                       target="_blank"
                       rel="noreferrer"

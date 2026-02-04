@@ -6,22 +6,22 @@ import { Zap, BarChart3, Settings, Wrench, Server } from "lucide-react";
 
 function Tier({ name, bullets, price, Icon }) {
   return (
-    <div className="rounded-2xl border border-slate-100 p-6 bg-white shadow-sm dark:border-slate-900 dark:bg-slate-950">
+    <div className="card-light">
       <div className="flex items-start gap-3">
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-2 dark:border-slate-800 dark:bg-slate-900">
-          <Icon size={18} className="text-accent-700 dark:text-accent-50" />
+        <div className="rounded-lg border border-vibrant/20 bg-vibrant/5 p-2">
+          <Icon size={18} className="text-vibrant" />
         </div>
 
         <div className="min-w-0">
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{name}</h3>
-          {price ? <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{price}</p> : null}
+          <h3 className="text-lg font-semibold text-black">{name}</h3>
+          {price ? <p className="mt-2 text-sm text-gray-600">{price}</p> : null}
         </div>
       </div>
 
       <ul className="mt-4 space-y-2 text-sm">
         {bullets.map((b) => (
-          <li key={b} className="flex gap-2 text-slate-700 dark:text-slate-200">
-            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent-600" />
+          <li key={b} className="flex gap-2 text-gray-700">
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-vibrant" />
             <span>{b}</span>
           </li>
         ))}
@@ -32,8 +32,8 @@ function Tier({ name, bullets, price, Icon }) {
 
 function Addon({ Icon, title }) {
   return (
-    <li className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-200">
-      <Icon size={18} className="text-accent-700 dark:text-accent-50 mt-0.5" />
+    <li className="flex items-start gap-2 text-sm text-gray-700">
+      <Icon size={18} className="text-vibrant mt-0.5" />
       <span>{title}</span>
     </li>
   );
@@ -53,7 +53,7 @@ export default function Services() {
         subtitle="Custom, system-driven development for startups and businesses — built to scale."
       />
 
-      <section className="pb-16">
+      <section className="pb-16 bg-white">
         <Container>
           <Reveal>
             <div className="grid gap-4 lg:grid-cols-3">
@@ -77,8 +77,8 @@ export default function Services() {
               />
             </div>
 
-            <div className="mt-10 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-slate-900 dark:bg-slate-950">
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Add-ons</h3>
+            <div className="mt-10 card-light">
+              <h3 className="text-lg font-semibold text-black">Add-ons</h3>
               <ul className="mt-4 space-y-3">
                 <Addon Icon={Wrench} title="Monthly maintenance" />
                 <Addon Icon={Server} title="Hosting & infrastructure support" />
