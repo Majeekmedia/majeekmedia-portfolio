@@ -33,10 +33,6 @@
     color-scheme: dark;
   }
 
-  * {
-    @apply border-border;
-  }
-
   html {
     scroll-behavior: smooth;
   }
