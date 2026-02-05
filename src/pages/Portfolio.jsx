@@ -21,8 +21,8 @@ function BulletList({ items }) {
     <ul className="mt-2 space-y-2 text-sm">
       {items.map((x) => (
         <li key={x} className="flex gap-2 text-black">
-          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-vibrant" />
-          <span>{x}</span>
+          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-vibrant flex-shrink-0" />
+          <span className="break-words">{x}</span>
         </li>
       ))}
     </ul>
@@ -31,12 +31,12 @@ function BulletList({ items }) {
 
 function ProjectCard({ p }) {
   return (
-    <div className="card-light">
+    <div className="card-light overflow-hidden">
       {/* Mobile/Tablet: Show title and demo button at top */}
       <div className="lg:hidden">
         <div className="flex items-start justify-between gap-4 mb-5">
-          <div className="min-w-0">
-            <h3 className="text-xl font-bold text-black">{p.title}</h3>
+          <div className="min-w-0 flex-1">
+            <h3 className="text-xl font-bold text-black break-words">{p.title}</h3>
             <p className="text-sm text-vibrant font-medium">{p.type}</p>
           </div>
 
@@ -49,7 +49,8 @@ function ProjectCard({ p }) {
                          text-vibrant hover:bg-vibrant/5 transition-all flex-shrink-0"
             >
               <ExternalLink size={16} />
-              View Demo
+              <span className="hidden sm:inline">View Demo</span>
+              <span className="sm:hidden">Demo</span>
             </a>
           ) : null}
         </div>
@@ -58,17 +59,17 @@ function ProjectCard({ p }) {
       {/* Desktop: 2-column layout */}
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Left Column: Image Gallery */}
-        <div>
+        <div className="min-w-0">
           <ImageGallery images={p.images} title={p.title} />
         </div>
 
         {/* Right Column: Project Info */}
-        <div className="space-y-5">
+        <div className="space-y-5 min-w-0">
           {/* Desktop: Title and demo button */}
           <div className="hidden lg:block">
             <div className="flex items-start justify-between gap-4 mb-4">
-              <div className="min-w-0">
-                <h3 className="text-2xl font-bold text-black">{p.title}</h3>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-2xl font-bold text-black break-words">{p.title}</h3>
                 <p className="text-sm text-vibrant font-medium mt-1">{p.type}</p>
               </div>
 
@@ -88,39 +89,39 @@ function ProjectCard({ p }) {
           </div>
 
           {p.summary ? (
-            <p className="text-black leading-relaxed">{p.summary}</p>
+            <p className="text-black leading-relaxed break-words">{p.summary}</p>
           ) : null}
 
           {p.features?.length ? (
-            <div>
+            <div className="min-w-0">
               <SectionLabel Icon={ListChecks} title="Features" />
               <BulletList items={p.features} />
             </div>
           ) : null}
 
           {p.role?.length ? (
-            <div>
+            <div className="min-w-0">
               <SectionLabel Icon={UserCog} title="Role" />
               <BulletList items={p.role} />
             </div>
           ) : null}
 
           {p.outcome ? (
-            <div>
+            <div className="min-w-0">
               <SectionLabel Icon={Target} title="Outcome" />
-              <p className="mt-2 text-sm text-black">{p.outcome}</p>
+              <p className="mt-2 text-sm text-black break-words">{p.outcome}</p>
             </div>
           ) : null}
 
           {p.tech?.length ? (
-            <div>
+            <div className="min-w-0">
               <SectionLabel Icon={Cpu} title="Tech Stack" />
               <div className="mt-2 flex flex-wrap gap-2">
                 {p.tech.map((tech) => (
                   <span
                     key={tech}
                     className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
-                               bg-vibrant/5 text-vibrant border border-vibrant/20"
+                               bg-vibrant/5 text-vibrant border border-vibrant/20 break-words"
                   >
                     {tech}
                   </span>
@@ -133,7 +134,7 @@ function ProjectCard({ p }) {
             <div className="rounded-xl border border-vibrant/20 bg-vibrant/5 p-4">
               <div className="flex items-start gap-2">
                 <ShieldAlert size={18} className="text-vibrant mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-black">
+                <p className="text-sm text-black break-words">
                   <span className="font-medium">Note:</span> {p.note}
                 </p>
               </div>
