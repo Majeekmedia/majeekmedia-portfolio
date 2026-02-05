@@ -129,7 +129,7 @@ export default function ImageGallery({ images = [], title = "Project" }) {
       {/* Fullscreen Modal */}
       {isFullscreen && (
         <div
-          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8"
           onClick={closeFullscreen}
         >
           {/* Close Button */}
@@ -149,13 +149,14 @@ export default function ImageGallery({ images = [], title = "Project" }) {
             </div>
           )}
 
-          {/* Main Fullscreen Image */}
-          <img
-            src={images[currentIndex]}
-            alt={`${title} screenshot ${currentIndex + 1}`}
-            className="max-w-full max-h-full object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
+          {/* Main Fullscreen Image Container */}
+          <div className="relative w-full max-w-7xl flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={images[currentIndex]}
+              alt={`${title} screenshot ${currentIndex + 1}`}
+              className="max-w-full h-auto max-h-[85vh] object-contain rounded-lg"
+            />
+          </div>
 
           {/* Navigation Arrows - Only show if more than 1 image */}
           {images.length > 1 && (
