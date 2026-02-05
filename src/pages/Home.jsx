@@ -1,8 +1,9 @@
 import Container from "../components/Container.jsx";
-import { ButtonLink } from "../components/Button.jsx";
 import Seo from "../components/Seo.jsx";
 import Reveal from "../components/Reveal.jsx";
-import { Code, Database, Server, Wrench, Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
+import Button, { ButtonLink } from "../components/Button.jsx";
+import { Instagram, Linkedin } from "lucide-react";
+import { projects } from "../data/projects.js";
 
 function SkillCategory({ title, skills, highlight }) {
   return (
@@ -230,18 +231,48 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Project Grid - We'll populate this with actual data later */}
+            {/* Project Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {/* Placeholder for projects - will update when you provide project info */}
-              <div className="card-light overflow-hidden">
-                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 mb-4 rounded-xl"></div>
-                <h3 className="text-lg font-bold text-black mb-2">Sample Project</h3>
-                <p className="text-sm text-gray-600 mb-3">Brief project description goes here</p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-2 py-1 bg-black/5 rounded text-xs text-black">React</span>
-                  <span className="px-2 py-1 bg-black/5 rounded text-xs text-black">Supabase</span>
+              {/* Show first 3 projects (excluding the portfolio website) */}
+              {projects.slice(0, 3).map((project) => (
+                <div key={project.title} className="card-light overflow-hidden group">
+                  {/* Project Thumbnail */}
+                  {project.images?.[0] ? (
+                    <div className="aspect-video bg-gray-100 mb-4 rounded-xl overflow-hidden">
+                      <img 
+                        src={project.images[0]} 
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  ) : (
+                    <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 mb-4 rounded-xl"></div>
+                  )}
+                  
+                  {/* Project Info */}
+                  <h3 className="text-lg font-bold text-black mb-2 break-words">{project.title}</h3>
+                  <p className="text-sm text-gray-600 mb-3 line-clamp-2 break-words">
+                    {project.summary}
+                  </p>
+                  
+                  {/* Tech Stack */}
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech?.slice(0, 4).map((tech) => (
+                      <span 
+                        key={tech} 
+                        className="px-2 py-1 bg-black/5 rounded text-xs text-black"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.tech?.length > 4 && (
+                      <span className="px-2 py-1 bg-black/5 rounded text-xs text-gray-500">
+                        +{project.tech.length - 4}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
 
             <div className="text-center pt-4">
