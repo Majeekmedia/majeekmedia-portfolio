@@ -129,7 +129,7 @@ export default function ImageGallery({ images = [], title = "Project" }) {
       {/* Fullscreen Modal */}
       {isFullscreen && (
         <div
-          className="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8"
+          className="fixed inset-0 bg-black/95 z-50"
           onClick={closeFullscreen}
         >
           {/* Close Button */}
@@ -149,12 +149,13 @@ export default function ImageGallery({ images = [], title = "Project" }) {
             </div>
           )}
 
-          {/* Main Fullscreen Image Container */}
-          <div className="relative w-full max-w-7xl flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+          {/* Centered Image Container */}
+          <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-8">
             <img
               src={images[currentIndex]}
               alt={`${title} screenshot ${currentIndex + 1}`}
-              className="max-w-full h-auto max-h-[85vh] object-contain rounded-lg"
+              className="max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
             />
           </div>
 
@@ -167,7 +168,7 @@ export default function ImageGallery({ images = [], title = "Project" }) {
                   goToPrevious();
                 }}
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 text-white
-                           flex items-center justify-center hover:bg-white/20 transition-all"
+                           flex items-center justify-center hover:bg-white/20 transition-all z-10"
                 aria-label="Previous image"
               >
                 <ChevronLeft size={28} />
@@ -179,7 +180,7 @@ export default function ImageGallery({ images = [], title = "Project" }) {
                   goToNext();
                 }}
                 className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 text-white
-                           flex items-center justify-center hover:bg-white/20 transition-all"
+                           flex items-center justify-center hover:bg-white/20 transition-all z-10"
                 aria-label="Next image"
               >
                 <ChevronRight size={28} />
