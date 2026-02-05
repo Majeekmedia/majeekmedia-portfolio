@@ -30,8 +30,8 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-vibrant text-white shadow-lg 
-                 hover:bg-[#1557b0] transition-all duration-300 hover:scale-110 hover:-translate-y-1
+      className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-white text-vibrant shadow-lg 
+                 hover:bg-vibrant hover:text-black transition-all duration-300 hover:scale-110 hover:-translate-y-1
                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-vibrant animate-in fade-in zoom-in duration-300"
       aria-label="Scroll to top"
     >
