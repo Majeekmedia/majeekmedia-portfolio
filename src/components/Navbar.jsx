@@ -16,9 +16,10 @@ export default function Navbar() {
 
   const NavItems = ({ onClick }) => (
     <>
+      <NavLink to="/" className={navLinkClass} onClick={onClick}>Home</NavLink>
+      <NavLink to="/about" className={navLinkClass} onClick={onClick}>About</NavLink>
       <NavLink to="/services" className={navLinkClass} onClick={onClick}>Services</NavLink>
       <NavLink to="/portfolio" className={navLinkClass} onClick={onClick}>Portfolio</NavLink>
-      <NavLink to="/about" className={navLinkClass} onClick={onClick}>About</NavLink>
       <NavLink to="/contact" className={navLinkClass} onClick={onClick}>Contact</NavLink>
     </>
   );

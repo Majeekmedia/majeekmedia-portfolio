@@ -1,6 +1,6 @@
 export const projects = [
   {
-    title: "Village Headmaster Estate Management Platform",
+    title: "Estate Management Platform",
     type: "Client Project",
     summary:
       "A comprehensive digital platform transforming residential estate management in Nigeria. Streamlines operations, automates billing, enhances transparency, and builds thriving communities for property managers, landlords, and residents.",
@@ -29,7 +29,7 @@ export const projects = [
     tech: ["React", "Vite", "Tailwind CSS", "Supabase", "PostgreSQL", "Lucide Icons"]
   },
   {
-    title: "MajeekHub - Music Career Management Platform",
+    title: "Music Career Management Platform",
     type: "SaaS Product",
     summary:
       "An all-in-one career management system for music artists and talent managers. Helps organize careers, plan music releases, manage promotions, create professional Electronic Press Kits (EPKs), and generate smart music links with click tracking.",
@@ -59,7 +59,7 @@ export const projects = [
     tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "Stripe", "Paystack"]
   },
   {
-    title: "Unitrade - Crypto Exchange Platform",
+    title: "Crypto Exchange Platform",
     type: "Functional MVP",
     summary:
       "A professional crypto exchange platform with Bybit-style UX. Features real-time trading simulation, KYC verification, wallet management, and admin controls. Built with a clean dark UI using orange and blue accents for a fintech-grade experience.",
