@@ -59,6 +59,39 @@ export const projects = [
     tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "Stripe", "Paystack"],
   },
   {
+    title: "Unitrade - Crypto Exchange Platform",
+    type: "Functional MVP",
+    summary:
+      "A professional crypto exchange platform with Bybit-style UX. Features real-time trading simulation, KYC verification, wallet management, and admin controls. Built with a clean dark UI using orange and blue accents for a fintech-grade experience.",
+    features: [
+      "User authentication with email/password and session management",
+      "KYC system with document upload, verification workflow, and admin review",
+      "Real-time dashboard with portfolio overview and P&L tracking",
+      "Simulated wallet interface with deposit/withdraw functionality",
+      "Dynamic coin listing module managed by admins",
+      "Buy/sell order execution with transaction history",
+      "Live market data with price charts and indicators",
+      "Comprehensive admin panel for user, KYC, and coin management"
+    ],
+    role: [
+      "Full-stack development",
+      "Trading interface implementation",
+      "Real-time data integration",
+      "Admin system architecture"
+    ],
+    outcome: "Fully functional MVP with simulated trading, deployable and ready for user testing",
+    demoUrl: "https://unitradeupdated.netlify.app/",
+    images: [
+      "/projects/unitrade/dashboard1.png",
+      "/projects/unitrade/home1.png",
+      "/projects/unitrade/dashboard2.png",
+      "/projects/unitrade/dashboard3.png",
+      "/projects/unitrade/dashboard4.png",
+    ],
+    tech: ["React", "Vite", "Tailwind CSS", "Supabase", "Node.js"],
+    note: "Simulated trading environment - no real blockchain execution or live funds involved yet."
+  },
+  {
     title: "E-commerce Platform",
     type: "Collaborative project",
     summary:
@@ -68,16 +101,6 @@ export const projects = [
     outcome: "Production-ready platform",
     images: [],
     tech: ["React"],
-  },
-  {
-    title: "Crypto Trading Platform",
-    type: "Client project (in progress)",
-    summary:
-      "Dashboard-driven trading interface with secure authentication and real-time data handling.",
-    features: ["User dashboards", "Secure authentication", "Real-time data handling"],
-    tech: ["React", "Supabase"],
-    note: "No sensitive data or links required.",
-    images: [],
   },
   {
     title: "Majeek Media Portfolio Website",
