@@ -24,9 +24,9 @@ export const projects = [
     images: [
       "/projects/village-headmaster/dashboard.png",
       "/projects/village-headmaster/home1.png",
-      "/projects/village-headmaster/home2.png",
+      "/projects/village-headmaster/home2.png"
     ],
-    tech: ["React", "Vite", "Tailwind CSS", "Supabase", "PostgreSQL", "Lucide Icons"],
+    tech: ["React", "Vite", "Tailwind CSS", "Supabase", "PostgreSQL", "Lucide Icons"]
   },
   {
     title: "MajeekHub - Music Career Management Platform",
@@ -54,9 +54,9 @@ export const projects = [
     images: [
       "/projects/majeekhub/dashboard.png",
       "/projects/majeekhub/home1.png",
-      "/projects/majeekhub/home2.png",
+      "/projects/majeekhub/home2.png"
     ],
-    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "Stripe", "Paystack"],
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "Stripe", "Paystack"]
   },
   {
     title: "Unitrade - Crypto Exchange Platform",
@@ -86,30 +86,34 @@ export const projects = [
       "/projects/unitrade/home1.png",
       "/projects/unitrade/dashboard2.png",
       "/projects/unitrade/dashboard3.png",
-      "/projects/unitrade/dashboard4.png",
+      "/projects/unitrade/dashboard4.png"
     ],
     tech: ["React", "Vite", "Tailwind CSS", "Supabase", "Node.js"],
     note: "Simulated trading environment - no real blockchain execution or live funds involved yet."
   },
   {
-    title: "E-commerce Platform",
-    type: "Collaborative project",
-    summary:
-      "Production-ready e-commerce experience with admin tooling and order workflows.",
-    features: ["Product management", "Order processing", "Admin dashboard"],
-    role: ["Frontend development", "Feature integration"],
-    outcome: "Production-ready platform",
-    images: [],
-    tech: ["React"],
-  },
-  {
     title: "Majeek Media Portfolio Website",
-    type: "Internal project",
+    type: "Personal Project",
     summary:
-      "A fast, SEO-friendly portfolio site built to convert visitors into leads and showcase real project experience.",
-    features: ["Responsive UI", "Contact form with EmailJS", "Modern design system", "SEO optimized"],
-    tech: ["React", "Vite", "Tailwind CSS", "EmailJS"],
+      "A modern, high-converting portfolio website showcasing real project experience. Built with performance and SEO in mind, featuring a clean design system, responsive layouts, and seamless contact integration.",
+    features: [
+      "Product-style image galleries with thumbnail navigation",
+      "2-column responsive project showcase layout",
+      "Contact form with EmailJS integration (dual email delivery)",
+      "Modern design system with Tailwind CSS and custom components",
+      "Fully SEO optimized with meta tags and semantic HTML",
+      "Mobile-first responsive design across all pages"
+    ],
+    role: [
+      "Full-stack development",
+      "UI/UX design and implementation",
+      "Email integration setup"
+    ],
+    outcome: "Professional portfolio driving client inquiries with clean UX and fast performance",
     demoUrl: "https://majeekmedia.com",
-    images: [],
+    images: [
+      "/projects/portfolio/home.png"
+    ],
+    tech: ["React", "Vite", "Tailwind CSS", "EmailJS", "Lucide Icons"]
   }
 ];
