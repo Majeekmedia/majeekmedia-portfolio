@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import BackToTop from "./components/BackToTop.jsx";
 
 import Home from "./pages/Home.jsx";
 import Services from "./pages/Services.jsx";
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <ScrollToTop />
+      <BackToTop />
       <Navbar />
 
       <main className="flex-1">

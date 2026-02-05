@@ -52,31 +52,52 @@ function ProcessCard({ number, title, description }) {
 }
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState({ state: "idle", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+    honey: "" // Honey pot field for spam prevention
+  });
+  const [status, setStatus] = useState("idle"); // "idle", "sending", "success", "error"
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const emailOk = useMemo(() => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
-  }, [form.email]);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim());
+  }, [formData.email]);
 
-  async function onSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setStatus({ state: "idle", message: "" });
 
-    const name = form.name.trim();
-    const email = form.email.trim();
-    const message = form.message.trim();
+    // Spam check: if honey pot is filled, silently reject
+    if (formData.honey) {
+      console.log("Spam detected");
+      setStatus("success"); // Fake success to fool bots
+      setTimeout(() => setStatus("idle"), 3000);
+      return;
+    }
+
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const message = formData.message.trim();
 
     if (!name || !email || !message) {
-      setStatus({ state: "error", message: "Please fill in all fields." });
+      setStatus("error");
+      // You might want to set a specific error message state here if needed
       return;
     }
     if (!emailOk) {
-      setStatus({ state: "error", message: "Please enter a valid email address." });
+      setStatus("error");
       return;
     }
 
-    setStatus({ state: "loading", message: "" });
+    setStatus("sending");
 
     try {
       // Send email using EmailJS
@@ -92,14 +113,11 @@ export default function Contact() {
         'L2gBGUmcgMb6baZiH'     // Public Key
       );
 
-      setForm({ name: "", email: "", message: "" });
-      setStatus({ state: "success", message: "Message sent successfully. We'll get back to you shortly." });
+      setFormData({ name: "", email: "", message: "", subject: "", honey: "" });
+      setStatus("success");
     } catch (error) {
       console.error('EmailJS Error:', error);
-      setStatus({
-        state: "error",
-        message: "Something went wrong. Please try again or contact us directly.",
-      });
+      setStatus("error");
     }
   }
 
@@ -131,17 +149,26 @@ export default function Contact() {
                   Tell me about your project and I'll get back to you within 24-48 hours.
                 </p>
 
-                <form className="space-y-5" onSubmit={onSubmit}>
+                <form className="space-y-5" onSubmit={handleSubmit}>
+                  {/* Honey Pot Field (Hidden) */}
+                  <input
+                    type="text"
+                    name="honey"
+                    style={{ position: 'absolute', opacity: 0, zIndex: -1, height: 0, width: 0 }}
+                    tabIndex="-1"
+                    autoComplete="off"
+                    value={formData.honey}
+                    onChange={handleChange}
+                  />
+
                   <div>
                     <label className="text-sm font-semibold text-black">Name</label>
                     <input
-                      value={form.name}
-                      onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
                       className="mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm outline-none
-                                 focus:ring-2 focus:ring-vibrant text-black transition-all
-                                 [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:text-black
-                                 [&:-webkit-autofill]:[-webkit-text-fill-color:black]
-                                 [&:-webkit-autofill]:[-webkit-box-shadow:0_0_0_1000px_white_inset]"
+                                 focus:ring-2 focus:ring-vibrant text-black transition-all"
                       placeholder="Your name"
                       autoComplete="name"
                     />
@@ -150,13 +177,11 @@ export default function Contact() {
                   <div>
                     <label className="text-sm font-semibold text-black">Email</label>
                     <input
-                      value={form.email}
-                      onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       className="mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm outline-none
-                                 focus:ring-2 focus:ring-vibrant text-black transition-all
-                                 [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:text-black
-                                 [&:-webkit-autofill]:[-webkit-text-fill-color:black]
-                                 [&:-webkit-autofill]:[-webkit-box-shadow:0_0_0_1000px_white_inset]"
+                                 focus:ring-2 focus:ring-vibrant text-black transition-all"
                       placeholder="you@company.com"
                       autoComplete="email"
                     />
@@ -165,27 +190,28 @@ export default function Contact() {
                   <div>
                     <label className="text-sm font-semibold text-black">Message</label>
                     <textarea
-                      value={form.message}
-                      onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       className="mt-2 w-full min-h-32 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm outline-none
                                  focus:ring-2 focus:ring-vibrant text-black transition-all resize-none"
                       placeholder="Briefly describe your project, timeline, and key requirements..."
                     />
                   </div>
 
-                  <Button type="submit" disabled={status.state === "loading"} className="w-full !py-4 text-base">
-                    {status.state === "loading" ? "Sending..." : "Send Message"}
+                  <Button type="submit" disabled={status === "sending"} className="w-full !py-4 text-base">
+                    {status === "sending" ? "Sending..." : "Send Message"}
                   </Button>
 
-                  {status.state === "success" ? (
+                  {status === "success" ? (
                     <div className="flex items-start gap-2 p-3 rounded-lg bg-green-50 border border-green-200">
                       <CheckCircle2 size={18} className="text-green-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-green-800">{status.message}</p>
+                      <p className="text-sm text-green-800">Message sent successfully. We'll get back to you shortly.</p>
                     </div>
                   ) : null}
-                  {status.state === "error" ? (
+                  {status === "error" ? (
                     <div className="p-3 rounded-lg bg-red-50 border border-red-200">
-                      <p className="text-sm text-red-800">{status.message}</p>
+                      <p className="text-sm text-red-800">Please fill in all fields correctly or try again later.</p>
                     </div>
                   ) : null}
                 </form>
@@ -226,7 +252,7 @@ export default function Contact() {
         </Container>
       </section>
 
-      {/* Why Contact Me Section */}
+      {/* Why Work With Me Section */}
       <section className="py-12 bg-black">
         <Container>
           <Reveal>
@@ -235,23 +261,10 @@ export default function Contact() {
                 Why Work <span className="text-vibrant">With Me?</span>
               </h2>
             </div>
-
             <div className="grid gap-8 md:grid-cols-3 max-w-4xl mx-auto">
-              <ValueCard
-                Icon={Zap}
-                title="Fast Response"
-                description="Quick turnaround on quotes and clear communication throughout the project."
-              />
-              <ValueCard
-                Icon={Target}
-                title="Focused Solutions"
-                description="I focus on solving your specific problems, not selling unnecessary features."
-              />
-              <ValueCard
-                Icon={Headphones}
-                title="Ongoing Support"
-                description="Post-launch support to ensure everything runs smoothly as your platform grows."
-              />
+              <ValueCard Icon={Zap} title="Fast Response" description="Quick turnaround on quotes and clear communication throughout the project." />
+              <ValueCard Icon={Target} title="Focused Solutions" description="I focus on solving your specific problems, not selling unnecessary features." />
+              <ValueCard Icon={Headphones} title="Ongoing Support" description="Post-launch support to ensure everything runs smoothly as your platform grows." />
             </div>
           </Reveal>
         </Container>
@@ -266,40 +279,13 @@ export default function Contact() {
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-4">
                   What to <span className="text-vibrant">Expect</span>
                 </h2>
-                <p className="text-lg text-black">
-                  Here's what happens after you reach out:
-                </p>
+                <p className="text-lg text-black">Here's what happens after you reach out:</p>
               </div>
-
               <div className="space-y-6">
-                <div className="card-light">
-                  <ProcessCard
-                    number="1"
-                    title="Initial Response"
-                    description="I'll respond within 24-48 hours to acknowledge your message and ask any clarifying questions."
-                  />
-                </div>
-                <div className="card-light">
-                  <ProcessCard
-                    number="2"
-                    title="Discovery Call"
-                    description="We'll schedule a call to discuss your project requirements, timeline, and budget in detail."
-                  />
-                </div>
-                <div className="card-light">
-                  <ProcessCard
-                    number="3"
-                    title="Custom Proposal"
-                    description="You'll receive a detailed proposal outlining the scope, timeline, and investment for your project."
-                  />
-                </div>
-                <div className="card-light">
-                  <ProcessCard
-                    number="4"
-                    title="Let's Build"
-                    description="Once approved, we kick off development with clear milestones and regular updates."
-                  />
-                </div>
+                <div className="card-light"><ProcessCard number="1" title="Initial Response" description="I'll respond within 24-48 hours to acknowledge your message." /></div>
+                <div className="card-light"><ProcessCard number="2" title="Discovery Call" description="We'll schedule a call to discuss requirements, timeline, and budget." /></div>
+                <div className="card-light"><ProcessCard number="3" title="Custom Proposal" description="You'll receive a detailed proposal outlining the scope and investment." /></div>
+                <div className="card-light"><ProcessCard number="4" title="Let's Build" description="Once approved, we kick off development with clear milestones." /></div>
               </div>
             </div>
           </Reveal>

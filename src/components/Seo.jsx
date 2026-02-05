@@ -24,6 +24,28 @@ export default function Seo({ title, description, path = "", image = "/images/og
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       {/* <meta property="twitter:image" content={fullImage} /> */}
+      {/* Structured Data (JSON-LD) */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          "name": "Majeek Media",
+          "image": "https://majeekmedia.com/images/hero/profile.png",
+          "url": "https://majeekmedia.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "NG"
+          },
+          "priceRange": "$$",
+          "description": "Scalable web platforms for startups and businesses.",
+          "sameAs": [
+            "https://twitter.com/majeekmedia",
+            "https://facebook.com/majeekmedia",
+            "https://instagram.com/preyetekenah",
+            "https://linkedin.com/in/preye-tekenah-a5799313a"
+          ]
+        })}
+      </script>
     </Helmet>
   );
 }
