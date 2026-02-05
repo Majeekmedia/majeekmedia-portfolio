@@ -163,13 +163,13 @@ export default function Portfolio() {
       {/* Projects Section */}
       <section className="py-12 bg-white">
         <Container>
-          <Reveal>
             <div className="space-y-8">
               {projects.map((p) => (
-                <ProjectCard key={p.title} p={p} />
+                <Reveal key={p.title}>
+                  <ProjectCard p={p} />
+                </Reveal>
               ))}
             </div>
-          </Reveal>
         </Container>
       </section>
 
