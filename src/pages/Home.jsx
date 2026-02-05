@@ -1,8 +1,8 @@
 import Container from "../components/Container.jsx";
 import Seo from "../components/Seo.jsx";
 import Reveal from "../components/Reveal.jsx";
-import Button, { ButtonLink } from "../components/Button.jsx";
-import { Instagram, Linkedin } from "lucide-react";
+import { ButtonLink } from "../components/Button.jsx";
+import { Instagram, Linkedin, Twitter, Facebook } from "lucide-react";
 import { projects } from "../data/projects.js";
 
 function SkillCategory({ title, skills, highlight }) {
