@@ -1,148 +1,90 @@
-import PageHeader from "../components/PageHeader.jsx";
+import { Link } from "react-router-dom";
+import Seo, { projectsItemList } from "../components/Seo.jsx";
 import Container from "../components/Container.jsx";
-import Seo from "../components/Seo.jsx";
 import Reveal from "../components/Reveal.jsx";
-import { ButtonLink } from "../components/Button.jsx";
-import ImageGallery from "../components/ImageGallery.jsx";
-import { projects } from "../data/projects.js";
-import { ListChecks, UserCog, Target, Cpu, ShieldAlert, ExternalLink } from "lucide-react";
+import Plate from "../components/Plate.jsx";
+import PhoneFrame from "../components/PhoneFrame.jsx";
+import {
+  projects,
+  projectExcerpt,
+  projectMeta,
+} from "../data/projects.js";
 
-function SectionLabel({ Icon, title }) {
-  return (
-    <div className="flex items-center gap-2">
-      <Icon size={16} className="text-vibrant" />
-      <h4 className="text-sm font-semibold text-black">{title}</h4>
-    </div>
-  );
-}
+/**
+ * The work index.
+ *
+ * WHAT CHANGED AND WHY
+ * This page used to render every project's FULL spread inline: summary, problem,
+ * challenge, solution, role, stack, outcome, note and a fourteen-item feature
+ * list, four times over. That was roughly 6,000px of scrolling before a visitor
+ * reached the second project, which made it unusable as an index.
+ *
+ * It also had a real bug: it filtered to `discipline === "web"`, so the two mobile
+ * apps never appeared here at all.
+ *
+ * Now it is an index. Each project is one row: lead image, name, category, a
+ * one-sentence excerpt and a link to its own page. Nothing is dropped, it is
+ * moved to where it belongs.
+ *
+ * Route slug stays `/portfolio` per the preservation contract.
+ */
 
-function BulletList({ items }) {
-  return (
-    <ul className="mt-2 space-y-2 text-sm">
-      {items.map((x) => (
-        <li key={x} className="flex gap-2 text-black">
-          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-vibrant flex-shrink-0" />
-          <span className="break-words">{x}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
+function ProjectRow({ project, i }) {
+  const lead = project.images?.[0];
 
-function ProjectCard({ p }) {
   return (
-    <div className="card-light overflow-hidden">
-      {/* Mobile/Tablet: Show title and demo button at top */}
-      <div className="lg:hidden">
-        <div className="flex items-start justify-between gap-4 mb-5">
-          <div className="min-w-0 flex-1">
-            <h3 className="text-xl font-bold text-black break-words">{p.title}</h3>
-            <p className="text-sm text-vibrant font-medium">{p.type}</p>
+    <Reveal as="li" delay={i * 50}>
+      <Link to={`/portfolio/${project.slug}`} className="mm-pointer-row group block py-8 md:py-10">
+        <div className="relative grid gap-6 md:grid-cols-12 md:items-center md:gap-8">
+          <span className="mm-index md:col-span-1" aria-hidden="true">
+            {project.index}
+          </span>
+
+          {lead ? (
+            project.discipline === "mobile" ? (
+              /*
+               * A mobile project gets a DEVICE FRAME, not a cropped plate.
+               *
+               * The index box is 16:10 landscape, so forcing a portrait phone
+               * screenshot into it cropped the image to its middle third and made
+               * it look enormously zoomed in. A small phone frame shows the whole
+               * screen at a sane size and reads unmistakably as an app.
+               */
+              <div className="flex md:col-span-3 md:justify-center">
+                <PhoneFrame
+                  src={lead.src}
+                  alt=""
+                  width={132}
+                  sizes="132px"
+                />
+              </div>
+            ) : (
+              <Plate
+                src={lead.src}
+                alt=""
+                sizes="(min-width: 768px) 22vw, 100vw"
+                className="aspect-[16/10] md:col-span-3"
+              />
+            )
+          ) : null}
+
+          <div className="md:col-span-8">
+            <h2 className="text-2xl transition-colors duration-fast ease-mm group-hover:text-mm-accent md:text-3xl">
+              {project.title}
+            </h2>
+
+            <p className="mt-2 text-small text-mm-text-muted">{projectMeta(project)}</p>
+
+            <p className="mt-4 max-w-[62ch] text-mm-text-muted">{projectExcerpt(project)}</p>
+
+            <span className="mm-underline mt-5 inline-block text-small text-mm-accent">
+              View project
+              <span className="sr-only">: {project.title}</span>
+            </span>
           </div>
-
-          {p.demoUrl ? (
-            <a
-              href={p.demoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border-2 border-vibrant/20 bg-white px-3 py-2 text-sm font-semibold
-                         text-vibrant hover:bg-vibrant/5 transition-all flex-shrink-0"
-            >
-              <ExternalLink size={16} />
-              <span className="hidden sm:inline">View Demo</span>
-              <span className="sm:hidden">Demo</span>
-            </a>
-          ) : null}
         </div>
-      </div>
-
-      {/* Desktop: 2-column layout */}
-      <div className="grid lg:grid-cols-2 gap-8">
-        {/* Left Column: Image Gallery */}
-        <div className="min-w-0">
-          <ImageGallery images={p.images} title={p.title} />
-        </div>
-
-        {/* Right Column: Project Info */}
-        <div className="space-y-5 min-w-0">
-          {/* Desktop: Title and demo button */}
-          <div className="hidden lg:block">
-            <div className="flex items-start justify-between gap-4 mb-4">
-              <div className="min-w-0 flex-1">
-                <h3 className="text-2xl font-bold text-black break-words">{p.title}</h3>
-                <p className="text-sm text-vibrant font-medium mt-1">{p.type}</p>
-              </div>
-
-              {p.demoUrl ? (
-                <a
-                  href={p.demoUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border-2 border-vibrant/20 bg-white px-3 py-2 text-sm font-semibold
-                             text-vibrant hover:bg-vibrant/5 transition-all flex-shrink-0"
-                >
-                  <ExternalLink size={16} />
-                  View Demo
-                </a>
-              ) : null}
-            </div>
-          </div>
-
-          {p.summary ? (
-            <p className="text-black leading-relaxed break-words">{p.summary}</p>
-          ) : null}
-
-          {p.features?.length ? (
-            <div className="min-w-0">
-              <SectionLabel Icon={ListChecks} title="Features" />
-              <BulletList items={p.features} />
-            </div>
-          ) : null}
-
-          {p.role?.length ? (
-            <div className="min-w-0">
-              <SectionLabel Icon={UserCog} title="Role" />
-              <BulletList items={p.role} />
-            </div>
-          ) : null}
-
-          {p.outcome ? (
-            <div className="min-w-0">
-              <SectionLabel Icon={Target} title="Outcome" />
-              <p className="mt-2 text-sm text-black break-words">{p.outcome}</p>
-            </div>
-          ) : null}
-
-          {p.tech?.length ? (
-            <div className="min-w-0">
-              <SectionLabel Icon={Cpu} title="Tech Stack" />
-              <div className="mt-2 flex flex-wrap gap-2">
-                {p.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
-                               bg-vibrant/5 text-vibrant border border-vibrant/20 break-words"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ) : null}
-
-          {p.note ? (
-            <div className="rounded-xl border border-vibrant/20 bg-vibrant/5 p-4">
-              <div className="flex items-start gap-2">
-                <ShieldAlert size={18} className="text-vibrant mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-black break-words">
-                  <span className="font-medium">Note:</span> {p.note}
-                </p>
-              </div>
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </div>
+      </Link>
+    </Reveal>
   );
 }
 
@@ -150,50 +92,50 @@ export default function Portfolio() {
   return (
     <>
       <Seo
-        title="Portfolio — Majeek Media"
-        description="Real project experience presented as case summaries — systems, dashboards, and platforms."
+        title="Work — Preye Tekenah | Majeek Media"
+        description="Selected software projects by Preye Tekenah: multi-tenant SaaS platforms, trading interfaces, and cross-platform mobile applications built end to end."
         path="/portfolio"
+        jsonLd={projectsItemList(projects)}
       />
 
-      <PageHeader
-        title="Portfolio"
-        subtitle="Selected work presented as case summaries — focused on systems, workflows, and outcomes."
-      />
-
-      {/* Projects Section */}
-      <section className="py-12 bg-white">
+      <section className="pb-12 pt-16 md:pb-16 md:pt-24">
         <Container>
-            <div className="space-y-8">
-              {projects.map((p) => (
-                <Reveal key={p.title}>
-                  <ProjectCard p={p} />
-                </Reveal>
-              ))}
+          <div className="grid gap-8 md:grid-cols-12">
+            <div className="md:col-span-8">
+              <h1 className="max-w-[20ch]">Work</h1>
+              <p className="mt-6 max-w-[52ch] text-lg text-mm-text-muted">
+                {projects.length} projects built end to end, across web platforms and mobile
+                applications. Each one is a real codebase with a real data model behind it.
+              </p>
             </div>
+
+            <div className="md:col-span-3 md:col-start-10 md:justify-self-end">
+              <p className="mm-label">{String(projects.length).padStart(2, "0")} projects</p>
+            </div>
+          </div>
         </Container>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-black">
+      <Container>
+        <ul className="border-t border-mm-line">
+          {projects.map((project, i) => (
+            <ProjectRow key={project.slug} project={project} i={i} />
+          ))}
+        </ul>
+      </Container>
+
+      <section className="mm-section border-t border-mm-line">
         <Container>
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
-                Ready to Start <span className="text-vibrant">Your Project?</span>
-              </h2>
-              <p className="text-lg text-white/80 mb-8">
-                Let's discuss how I can help bring your ideas to life with clean code and scalable solutions.
-              </p>
-              <div className="flex flex-wrap justify-center items-center gap-4">
-                <ButtonLink to="/contact" variant="vibrant" className="pulse-glow">
-                  Get in Touch
-                </ButtonLink>
-                <ButtonLink to="/services" variant="secondary">
-                  View Services
-                </ButtonLink>
-              </div>
+          <div className="grid gap-8 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-7">
+              <h2 className="max-w-[18ch]">Tell me what you need built.</h2>
             </div>
-          </Reveal>
+            <div className="md:col-span-4 md:col-start-9">
+              <Link to="/contact" className="mm-btn mm-btn-accent">
+                Get in touch
+              </Link>
+            </div>
+          </div>
         </Container>
       </section>
     </>

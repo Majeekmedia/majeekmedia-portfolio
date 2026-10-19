@@ -1,3 +1,51 @@
+# Preye Tekenah — Majeek Media
+# https://majeekmedia.com
+#
+# All crawlers, including the AI engines, are explicitly allowed. This is a
+# portfolio: being cited and summarised is the point, so there is nothing to
+# restrict. Named rather than relying on the wildcard, because several AI
+# crawlers respect their own token and a wildcard alone is not always read.
+
 User-agent: *
 Allow: /
+
+# --- Search engines ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- AI / generative engines (GEO) ---
+# Allowlisted deliberately: a portfolio wants to be quoted and cited.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://majeekmedia.com/sitemap.xml

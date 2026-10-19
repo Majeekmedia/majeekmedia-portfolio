@@ -3,32 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/logo.png" />
 
-    <title>Majeek Media — Scalable Web Platforms</title>
+    <!--
+      Fonts are SELF-HOSTED via @fontsource imports in src/index.css.
+      The previous Google Fonts <link> was a render-blocking third-party
+      request and is deliberately gone. No preconnect needed: same origin.
+    -->
+
+    <link rel="icon" type="image/webp" href="/optimized/logo-64.webp" />
+    <link rel="apple-touch-icon" href="/optimized/logo-256.webp" />
+
+    <!--
+      ONLY TAGS THAT HELMET DOES NOT MANAGE BELONG IN THIS FILE.
+
+      This is important and easy to get wrong. `react-helmet-async` writes
+      <title>, <meta name="description">, <link rel="canonical">, the Open Graph
+      and Twitter tags, and the JSON-LD at runtime. Anything here that Helmet
+      also writes ends up DUPLICATED in <head>, and the browser/search engine uses
+      the FIRST one, which is this static copy.
+
+      That produced a real bug: every page reported `canonical = https://majeekmedia.com/`
+      because the static canonical won over the per-route one, which would have told
+      Google that all six pages were duplicates of the homepage.
+
+      So: the name and identity live in <title> here for the pre-render snapshot,
+      and Helmet replaces it per route. Nothing else that Helmet owns is repeated.
+    -->
+    <title>Preye Tekenah — Software Engineer &amp; Full-Stack Developer | Majeek Media</title>
+
+    <!--
+      Identity tags Helmet does NOT emit, so they are safe and useful here: a
+      crawler reading raw HTML learns whose site this is even before any JS runs.
+    -->
+    <meta name="author" content="Preye Tekenah — Majeek Media" />
     <meta
-      name="description"
-      content="Majeek Media builds scalable web platforms for startups and businesses — MVPs, dashboards, custom web systems."
+      name="keywords"
+      content="Preye Tekenah, Majeek Media, Preye Tekenah software engineer, Majeek Media developer, full-stack developer Nigeria, React developer, React Native developer, SaaS developer"
     />
-
-    <!-- Inter font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    >
-
-    <style>
-      body {
-        font-family:
-          Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
-          sans-serif;
-      }
-    </style>
+    <meta name="theme-color" content="#0e1116" />
   </head>
   <body>
     <div id="root"></div>
+
+    <!--
+      NOSCRIPT FALLBACK.
+
+      A client-rendered app renders nothing without JavaScript, which leaves a
+      crawler or a JS-disabled visitor with a blank page. This block is not shown
+      to normal visitors (React replaces #root immediately), but it guarantees
+      that anyone reading the raw HTML learns who the site belongs to.
+
+      Real content, not a keyword list: one identity sentence, the specialisms,
+      the work, and the contact route.
+    -->
+    <noscript>
+      <div style="max-width: 46rem; margin: 0 auto; padding: 3rem 1.5rem; font-family: system-ui, sans-serif; color: #f0eee8; background: #0e1116; line-height: 1.6;">
+        <h1 style="margin: 0 0 1rem; font-size: 2rem;">Preye Tekenah</h1>
+        <p style="margin: 0 0 1rem;">
+          Software engineer and full-stack developer. I build web platforms, mobile
+          applications and SaaS products under the name <strong>Majeek Media</strong>.
+        </p>
+        <p style="margin: 0 0 1rem;">
+          React, Next.js, React Native, Expo, TypeScript, PHP, Node.js, Supabase and
+          PostgreSQL. Based in Nigeria, working remotely.
+        </p>
+        <p style="margin: 0 0 1.5rem;">
+          Selected work includes the Village Headmaster community management platform, a
+          multi-provider weather app, an offline-first notes app, and a crypto exchange
+          interface.
+        </p>
+        <p style="margin: 0;">
+          <a href="mailto:contact@majeekmedia.com" style="color: #6ba4fa;">contact@majeekmedia.com</a>
+          &nbsp;·&nbsp;
+          <a href="https://www.linkedin.com/in/preye-tekenah-a5799313a" style="color: #6ba4fa;">LinkedIn</a>
+          &nbsp;·&nbsp;
+          <a href="https://github.com/Majeekmedia" style="color: #6ba4fa;">GitHub</a>
+        </p>
+        <p style="margin: 1.5rem 0 0; color: #9a9a9a; font-size: 0.875rem;">
+          This site needs JavaScript for the full experience.
+        </p>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

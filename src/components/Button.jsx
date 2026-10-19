@@ -1,41 +1,54 @@
 import { Link } from "react-router-dom";
 
-const base =
-  "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold " +
-  "transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2";
+/**
+ * Buttons.
+ *
+ * Two variants only:
+ *   accent — the ONE primary action per viewport. Accent fill, near-black label
+ *            (16.10:1). There is one per screen, deliberately.
+ *   ghost  — every secondary action.
+ *
+ * Labels are kept to 1-3 words so they never wrap at desktop. `white-space:
+ * nowrap` is enforced in `.mm-btn` so a wrap is impossible rather than unlikely.
+ *
+ * Every button and link uses the same focus ring (`:focus-visible` in the base
+ * layer), which is why there is no per-component focus styling here.
+ *
+ * The previous site shipped SIX different labels for a single "contact" intent
+ * (Start a Project, Get In Touch, Get in Touch, Let's Work Together, Let's Build
+ * Something Great, Read More About Me). One intent now has one label: GET IN TOUCH.
+ */
 
-function getStyles(variant, disabled) {
-  if (variant === "vibrant") {
+const base = "mm-btn";
+
+export function ButtonLink({
+  to,
+  href,
+  variant = "ghost",
+  children,
+  className = "",
+  ...rest
+}) {
+  const cls = `${base} ${variant === "accent" ? "mm-btn-accent" : "mm-btn-ghost"} ${className}`;
+
+  // External destinations open in a new tab with the security attributes that
+  // `target="_blank"` otherwise leaks.
+  if (href) {
+    const external = /^https?:\/\//.test(href);
     return (
-      "btn-vibrant " +
-      (disabled ? "opacity-60 cursor-not-allowed hover:scale-100" : "")
+      <a
+        href={href}
+        className={cls}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        {...rest}
+      >
+        {children}
+      </a>
     );
   }
 
-  if (variant === "outline-vibrant") {
-    return (
-      "btn-outline-vibrant " +
-      (disabled ? "opacity-60 cursor-not-allowed" : "")
-    );
-  }
-
-  if (variant === "primary") {
-    return (
-      "btn-vibrant " +
-      (disabled ? "opacity-60 cursor-not-allowed hover:scale-100" : "")
-    );
-  }
-
-  // secondary (light background style)
   return (
-    "bg-white border-2 border-vibrant/20 text-vibrant hover:bg-vibrant/5 hover:border-vibrant/40 " +
-    (disabled ? "opacity-60 cursor-not-allowed" : "")
-  );
-}
-
-export function ButtonLink({ to, variant = "primary", children, className = "" }) {
-  return (
-    <Link to={to} className={`${base} ${getStyles(variant, false)} ${className}`}>
+    <Link to={to} className={cls} {...rest}>
       {children}
     </Link>
   );
@@ -43,18 +56,18 @@ export function ButtonLink({ to, variant = "primary", children, className = "" }
 
 export function Button({
   type = "button",
-  variant = "primary",
-  disabled,
+  variant = "ghost",
   children,
   className = "",
-  ...props
+  disabled,
+  ...rest
 }) {
   return (
     <button
       type={type}
       disabled={disabled}
-      className={`${base} ${getStyles(variant, disabled)} ${className}`}
-      {...props}
+      className={`${base} ${variant === "accent" ? "mm-btn-accent" : "mm-btn-ghost"} ${className}`}
+      {...rest}
     >
       {children}
     </button>

@@ -1,0 +1,416 @@
+{
+  "/images/hero/profile.png": {
+    "widths": [
+      480,
+      819
+    ],
+    "width": 819,
+    "height": 1024,
+    "transparent": true,
+    "transparencyPct": 40.1,
+    "files": [
+      "/optimized/images/hero/profile-480.webp",
+      "/optimized/images/hero/profile-819.webp"
+    ]
+  },
+  "/projects/notes-app/01-notes-list.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/notes-app/01-notes-list-480.webp",
+      "/optimized/projects/notes-app/01-notes-list-640.webp",
+      "/optimized/projects/notes-app/01-notes-list-780.webp"
+    ]
+  },
+  "/projects/notes-app/02-search-and-filter.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/notes-app/02-search-and-filter-480.webp",
+      "/optimized/projects/notes-app/02-search-and-filter-640.webp",
+      "/optimized/projects/notes-app/02-search-and-filter-780.webp"
+    ]
+  },
+  "/projects/notes-app/03-actions-menu.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/notes-app/03-actions-menu-480.webp",
+      "/optimized/projects/notes-app/03-actions-menu-640.webp",
+      "/optimized/projects/notes-app/03-actions-menu-780.webp"
+    ]
+  },
+  "/projects/notes-app/04-note-editor.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/notes-app/04-note-editor-480.webp",
+      "/optimized/projects/notes-app/04-note-editor-640.webp",
+      "/optimized/projects/notes-app/04-note-editor-780.webp"
+    ]
+  },
+  "/projects/notes-app/05-empty-state.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/notes-app/05-empty-state-480.webp",
+      "/optimized/projects/notes-app/05-empty-state-640.webp",
+      "/optimized/projects/notes-app/05-empty-state-780.webp"
+    ]
+  },
+  "/projects/notes-app/06-note-not-found.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/notes-app/06-note-not-found-480.webp",
+      "/optimized/projects/notes-app/06-note-not-found-640.webp",
+      "/optimized/projects/notes-app/06-note-not-found-780.webp"
+    ]
+  },
+  "/projects/notes-app/07-dark-mode.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/notes-app/07-dark-mode-480.webp",
+      "/optimized/projects/notes-app/07-dark-mode-640.webp",
+      "/optimized/projects/notes-app/07-dark-mode-780.webp"
+    ]
+  },
+  "/projects/unitrade/dashboard1.png": {
+    "widths": [
+      480,
+      640,
+      1024
+    ],
+    "width": 1024,
+    "height": 576,
+    "transparent": false,
+    "transparencyPct": 23.3,
+    "files": [
+      "/optimized/projects/unitrade/dashboard1-480.webp",
+      "/optimized/projects/unitrade/dashboard1-640.webp",
+      "/optimized/projects/unitrade/dashboard1-1024.webp"
+    ]
+  },
+  "/projects/unitrade/dashboard2.png": {
+    "widths": [
+      480,
+      640,
+      1024
+    ],
+    "width": 1024,
+    "height": 576,
+    "transparent": false,
+    "transparencyPct": 4.1,
+    "files": [
+      "/optimized/projects/unitrade/dashboard2-480.webp",
+      "/optimized/projects/unitrade/dashboard2-640.webp",
+      "/optimized/projects/unitrade/dashboard2-1024.webp"
+    ]
+  },
+  "/projects/unitrade/dashboard3.png": {
+    "widths": [
+      480,
+      640,
+      1024
+    ],
+    "width": 1024,
+    "height": 576,
+    "transparent": false,
+    "transparencyPct": 3.8,
+    "files": [
+      "/optimized/projects/unitrade/dashboard3-480.webp",
+      "/optimized/projects/unitrade/dashboard3-640.webp",
+      "/optimized/projects/unitrade/dashboard3-1024.webp"
+    ]
+  },
+  "/projects/unitrade/dashboard4.png": {
+    "widths": [
+      480,
+      640,
+      1024
+    ],
+    "width": 1024,
+    "height": 576,
+    "transparent": false,
+    "transparencyPct": 16.5,
+    "files": [
+      "/optimized/projects/unitrade/dashboard4-480.webp",
+      "/optimized/projects/unitrade/dashboard4-640.webp",
+      "/optimized/projects/unitrade/dashboard4-1024.webp"
+    ]
+  },
+  "/projects/unitrade/home1.png": {
+    "widths": [
+      480,
+      640,
+      1024
+    ],
+    "width": 1024,
+    "height": 576,
+    "transparent": false,
+    "transparencyPct": 2.1,
+    "files": [
+      "/optimized/projects/unitrade/home1-480.webp",
+      "/optimized/projects/unitrade/home1-640.webp",
+      "/optimized/projects/unitrade/home1-1024.webp"
+    ]
+  },
+  "/projects/vhm/admin_dashboard.png": {
+    "widths": [
+      1024,
+      1600,
+      1920
+    ],
+    "width": 1920,
+    "height": 891,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/vhm/admin_dashboard-1024.webp",
+      "/optimized/projects/vhm/admin_dashboard-1600.webp",
+      "/optimized/projects/vhm/admin_dashboard-1920.webp"
+    ]
+  },
+  "/projects/vhm/admin_mobile.png": {
+    "widths": [
+      480,
+      640,
+      752
+    ],
+    "width": 752,
+    "height": 965,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/vhm/admin_mobile-480.webp",
+      "/optimized/projects/vhm/admin_mobile-640.webp",
+      "/optimized/projects/vhm/admin_mobile-752.webp"
+    ]
+  },
+  "/projects/vhm/landlord_dashboard.png": {
+    "widths": [
+      1024,
+      1600,
+      1920
+    ],
+    "width": 1920,
+    "height": 888,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/vhm/landlord_dashboard-1024.webp",
+      "/optimized/projects/vhm/landlord_dashboard-1600.webp",
+      "/optimized/projects/vhm/landlord_dashboard-1920.webp"
+    ]
+  },
+  "/projects/vhm/landlord_mobile.png": {
+    "widths": [
+      480,
+      640,
+      720
+    ],
+    "width": 720,
+    "height": 1600,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/vhm/landlord_mobile-480.webp",
+      "/optimized/projects/vhm/landlord_mobile-640.webp",
+      "/optimized/projects/vhm/landlord_mobile-720.webp"
+    ]
+  },
+  "/projects/vhm/tenant_dashboard.png": {
+    "widths": [
+      1024,
+      1600,
+      1918
+    ],
+    "width": 1918,
+    "height": 892,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/vhm/tenant_dashboard-1024.webp",
+      "/optimized/projects/vhm/tenant_dashboard-1600.webp",
+      "/optimized/projects/vhm/tenant_dashboard-1918.webp"
+    ]
+  },
+  "/projects/vhm/tenant_mobile.png": {
+    "widths": [
+      480,
+      640,
+      720
+    ],
+    "width": 720,
+    "height": 1600,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/vhm/tenant_mobile-480.webp",
+      "/optimized/projects/vhm/tenant_mobile-640.webp",
+      "/optimized/projects/vhm/tenant_mobile-720.webp"
+    ]
+  },
+  "/projects/weather-app/01-today.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/weather-app/01-today-480.webp",
+      "/optimized/projects/weather-app/01-today-640.webp",
+      "/optimized/projects/weather-app/01-today-780.webp"
+    ]
+  },
+  "/projects/weather-app/02-daily-forecast.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/weather-app/02-daily-forecast-480.webp",
+      "/optimized/projects/weather-app/02-daily-forecast-640.webp",
+      "/optimized/projects/weather-app/02-daily-forecast-780.webp"
+    ]
+  },
+  "/projects/weather-app/03-locations.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/weather-app/03-locations-480.webp",
+      "/optimized/projects/weather-app/03-locations-640.webp",
+      "/optimized/projects/weather-app/03-locations-780.webp"
+    ]
+  },
+  "/projects/weather-app/04-settings.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/weather-app/04-settings-480.webp",
+      "/optimized/projects/weather-app/04-settings-640.webp",
+      "/optimized/projects/weather-app/04-settings-780.webp"
+    ]
+  },
+  "/projects/weather-app/05-empty-state.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/weather-app/05-empty-state-480.webp",
+      "/optimized/projects/weather-app/05-empty-state-640.webp",
+      "/optimized/projects/weather-app/05-empty-state-780.webp"
+    ]
+  },
+  "/projects/weather-app/06-today-light.png": {
+    "widths": [
+      480,
+      640,
+      780
+    ],
+    "width": 780,
+    "height": 1688,
+    "transparent": false,
+    "transparencyPct": 0,
+    "files": [
+      "/optimized/projects/weather-app/06-today-light-480.webp",
+      "/optimized/projects/weather-app/06-today-light-640.webp",
+      "/optimized/projects/weather-app/06-today-light-780.webp"
+    ]
+  },
+  "/logo.png": {
+    "widths": [
+      64,
+      128,
+      256
+    ],
+    "width": 4000,
+    "height": 4000,
+    "transparent": true,
+    "transparencyPct": 86.1,
+    "files": [
+      "/optimized/logo-64.webp",
+      "/optimized/logo-128.webp",
+      "/optimized/logo-256.webp"
+    ]
+  }
+}

@@ -1,41 +1,65 @@
-import { useState, useEffect } from 'react';
-import { ArrowUp } from 'lucide-react';
+import { useEffect, useState } from "react";
 
+/**
+ * Back-to-top control.
+ *
+ * Fixed from the audit:
+ *  - The old version used `window.addEventListener('scroll')`, which the brief
+ *    bans outright: it fires on every frame and forces a re-render each time.
+ *    This uses an IntersectionObserver on a sentinel instead.
+ *  - The old version applied `animate-in fade-in zoom-in`, which are
+ *    `tailwindcss-animate` utilities for a package that is not installed. They
+ *    produced no CSS at all, so the entrance animation never ran.
+ *  - The old version had no visible focus ring, because `ring-vibrant` resolved
+ *    to no CSS.
+ *
+ * This version is keyboard reachable, has the standard focus ring, and honours
+ * reduced motion by simply appearing rather than scaling in.
+ */
 export default function BackToTop() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      // Show button when page is scrolled down 300px
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
+    const sentinel = document.createElement("div");
+    sentinel.setAttribute("aria-hidden", "true");
+    sentinel.style.cssText = "position:absolute;top:600px;left:0;height:1px;width:1px;";
+    document.body.prepend(sentinel);
 
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(sentinel);
+
+    return () => {
+      observer.disconnect();
+      sentinel.remove();
+    };
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
-  if (!isVisible) return null;
+  if (!visible) return null;
 
   return (
     <button
-      onClick={scrollToTop}
-      className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-white text-vibrant shadow-lg 
-                 hover:bg-vibrant hover:text-black transition-all duration-300 hover:scale-110 hover:-translate-y-1
-                 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-vibrant animate-in fade-in zoom-in duration-300"
-      aria-label="Scroll to top"
+      type="button"
+      onClick={() => {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      }}
+      className="fixed bottom-6 right-6 z-overlay flex h-11 w-11 items-center justify-center border border-mm-line-control bg-mm-surface text-mm-text transition-colors duration-fast ease-mm hover:border-mm-accent hover:text-mm-accent"
     >
-      <ArrowUp size={24} />
+      <span className="sr-only">Back to top</span>
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        aria-hidden="true"
+      >
+        <path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" />
+      </svg>
     </button>
   );
 }

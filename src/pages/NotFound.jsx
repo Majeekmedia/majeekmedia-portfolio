@@ -1,39 +1,56 @@
-import Container from "../components/Container.jsx";
-import { ButtonLink } from "../components/Button.jsx";
+import { Link } from "react-router-dom";
 import Seo from "../components/Seo.jsx";
-import { AlertTriangle } from "lucide-react";
+import Container from "../components/Container.jsx";
 
+/**
+ * 404.
+ *
+ * The previous version centred a rounded icon badge, a "Page Not Found"
+ * headline, and a 256px `blur-[100px]` decorative glow circle. The glow is gone:
+ * it was pure decoration, and it is one of the expensive blur layers the audit
+ * flagged.
+ *
+ * Replaced with the accent field doing the work instead, and real routes offered
+ * rather than two buttons.
+ */
 export default function NotFound() {
   return (
     <>
-      <Seo title="Page Not Found — Majeek Media" path="/404" />
-      <section className="bg-black min-h-[70vh] flex items-center justify-center relative overflow-hidden">
-        {/* Background glow effects */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-vibrant/20 rounded-full blur-[100px] pointer-events-none" />
-        
+      <Seo title="Page not found — Majeek Media" description="That page does not exist." path="/404" />
+
+      <section className="mm-section-lg">
         <Container>
-          <div className="text-center relative z-10 max-w-lg mx-auto">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-vibrant/10 border border-vibrant/20 mb-6 animate-bounce-slow">
-              <AlertTriangle size={40} className="text-vibrant" />
+          <div className="grid gap-10 md:grid-cols-12">
+            <div className="md:col-span-7">
+              <p className="mm-display text-mm-accent">404</p>
+              <h1 className="mt-6 max-w-[16ch] text-[clamp(2rem,5vw,3.5rem)]">
+                That page is not here.
+              </h1>
+              <p className="mt-6 text-lg text-mm-text-muted">
+                The link may be old, or the address may have a typo in it.
+              </p>
+              <Link to="/" className="mm-btn mm-btn-accent mt-10">
+                Back home
+              </Link>
             </div>
-            
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
-              Page <span className="text-vibrant">Not Found</span>
-            </h1>
-            
-            <p className="text-lg text-white/70 mb-8 leading-relaxed">
-              The page you're looking for doesn't exist or has been moved. 
-              Let's get you back on track.
-            </p>
-            
-            <div className="flex flex-wrap gap-4 justify-center">
-              <ButtonLink to="/" variant="vibrant">
-                Return Home
-              </ButtonLink>
-              <ButtonLink to="/services" variant="secondary">
-                View Services
-              </ButtonLink>
-            </div>
+
+            <nav className="md:col-span-4 md:col-start-9" aria-label="Site sections">
+              <h2 className="mm-label mb-6">Where to go</h2>
+              <ul>
+                {[
+                  { to: "/portfolio", label: "Work" },
+                  { to: "/services", label: "Services" },
+                  { to: "/about", label: "About" },
+                  { to: "/contact", label: "Contact" },
+                ].map((l) => (
+                  <li key={l.to} className="border-b border-mm-line">
+                    <Link to={l.to} className="mm-underline block py-4">
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
         </Container>
       </section>

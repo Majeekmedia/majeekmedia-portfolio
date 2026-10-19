@@ -1,309 +1,798 @@
+/* ==========================================================================
+   MAJEEK MEDIA — design system
+   Direction: High-End Digital Brutalism x Kinetic Poster x Swiss Editorial
+   System of record: DESIGN_SYSTEM.md
+   Contrast verified by: node docs/qa/contrast.mjs
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   FONTS — self-hosted, no third-party render-blocking request.
+   Archivo Variable ships as a weight-only axis (100-900) at 34 KB latin.
+   The width-axis variant is 88 KB and is NOT loaded: 54 extra KB is not
+   repayable for two display moments. The weight range carries the contrast.
+   -------------------------------------------------------------------------- */
+@import "@fontsource-variable/archivo/wght.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    /* Vibrant Blue Accents - Primary Colors (Brand Blue) */
-    --color-vibrant: #1a73e8;
-    --color-vibrant-glow: #1557b0;
-    --color-vibrant-dark: #0d47a1;
+/* ==========================================================================
+   TOKENS
+   ========================================================================== */
+:root {
+  /* --- colour ------------------------------------------------------------
+     COOL NEAR-BLACK GROUND. Deliberately blue-tinted (#0e1116, not neutral
+     #101010), so a blue accent reads as one family rather than a blue element
+     dropped onto grey. Never pure #000000: it kills depth and makes the page
+     read as a default rather than as a decision.
 
-    /* Dark Theme Colors */
-    --color-dark-bg: #000000;
-    --color-dark-surface: #0a0a0a;
-    --color-dark-card: #111111;
-    --color-dark-border: #1a1a1a;
+     TWO BLUE ROLES, because one value cannot do both jobs:
+       accent     — the BRIGHT blue. All accent TEXT, links, index numerals,
+                    rules and the focus ring. AAA on every surface (7.49:1).
+       accentFill — the BRAND blue (#2470f0, extracted from the logo). Used for
+                    button FILLS only, carrying a white label at 4.52:1.
+     The brand blue as small text measures 4.19:1 and would fail AA, which is
+     why the bright blue carries text instead. Verified by
+     `node docs/qa/contrast.mjs`.
 
-    /* Light Theme Colors (for cards on dark bg) */
-    --color-light-card: #ffffff;
-    --color-light-border: #e5e7eb;
+     textMuted was raised from #858585 (4.42:1 on the raised surface, fails AA)
+     to #9a9a9a, which clears AA on all three surfaces. --- */
+  --mm-bg: #0e1116;
+  --mm-surface: #151a22;
+  --mm-surface-raised: #1c222c;
 
-    /* Text Colors */
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #000000;
-    --color-text-muted: #71717a;
+  /* Hairlines between content rows. Decorative dividers, exempt from the 3:1
+     UI bar, and documented as such so nobody reads 1.36:1 as a text token. */
+  --mm-line: #262d38;
 
-    /* Shadow & Glow Effects */
-    --shadow-glow: 0 0 20px rgba(26, 115, 232, 0.4);
-    --shadow-glow-sm: 0 0 10px rgba(26, 115, 232, 0.3);
-    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-card-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  /* Interactive control borders. WCAG 1.4.11 requires 3:1 for the boundary
+     that identifies a control, so this is a SEPARATE token from `line`.
+     The ghost button border measured 1.89:1 before this was split out. */
+  --mm-line-control: #566478;
 
-    color-scheme: dark;
-  }
+  --mm-text: #f0eee8;        /*  16.30:1 on bg  AAA */
+  --mm-text-muted: #9a9a9a;  /*   6.72:1 on bg  AA  */
 
+  --mm-accent: #6ba4fa;      /*   7.49:1 on bg  AAA  accent text */
+  --mm-accent-dim: #4a8cf7;  /*   5.75:1 on bg  AA   accent text hover */
+  --mm-accent-fill: #2470f0;     /* BRAND blue. White label 4.52:1 AA */
+  --mm-accent-fill-dim: #1e63da; /* white label on it 5.45:1 AA */
+
+  --mm-danger: #ff8172;      /*   7.78:1 on bg  AAA  error text */
+
+  /* --- type -------------------------------------------------------------- */
+  --mm-font-display: "Archivo Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mm-font-text: "Archivo Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mm-font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --mm-fs-display: clamp(3rem, 11vw, 9.5rem);
+  --mm-fs-h1: clamp(2.5rem, 6.5vw, 5.5rem);
+  --mm-fs-h2: clamp(2rem, 4.5vw, 4rem);
+  --mm-fs-h3: clamp(1.375rem, 2.2vw, 2rem);
+  --mm-fs-body: 1.0625rem;
+  --mm-fs-small: 0.875rem;
+  --mm-fs-mono: 0.75rem;
+
+  /* Tracking floor is -0.04em. The system stops at -0.035em so letters never
+     collide. Display type needs this to read as poster type, not as a heading. */
+  --mm-track-display: -0.035em;
+  --mm-track-tight: -0.02em;
+  --mm-track-label: 0.14em;
+
+  /* --- space ------------------------------------------------------------- */
+  --mm-section: clamp(4.5rem, 9vw, 8rem);
+  --mm-section-lg: clamp(6rem, 12vw, 10rem);
+  --mm-gutter: clamp(1rem, 2vw, 2rem);
+  --mm-measure: 68ch;
+
+  /* --- shape: ONE radius, used identically everywhere -------------------- */
+  --mm-radius: 2px;
+
+  /* --- motion ------------------------------------------------------------ */
+  --mm-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --mm-dur-fast: 180ms;
+  --mm-dur: 420ms;
+  --mm-dur-slow: 720ms;
+
+  /* --- z-index: a documented scale, never arbitrary values --------------- */
+  --mm-z-content: 1;
+  --mm-z-sticky: 40;
+  --mm-z-nav: 50;
+  --mm-z-overlay: 60;
+
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   Movement is what triggers vestibular discomfort, so movement is what goes.
+   Colour and opacity feedback stays, because removing it destroys real
+   affordance. A blanket 0.01ms kill would be simpler and worse.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
 
-  html, body {
-    height: 100%;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-property: color, background-color, border-color, opacity, box-shadow !important;
+    transition-duration: 150ms !important;
+  }
+
+  /* Content is present, not animating to present. */
+  .mm-reveal,
+  .mm-reveal-lines > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .mm-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Scroll-linked and entrance motion is disabled. The overscale is removed too,
+     because it only existed to give a drift somewhere to travel. */
+  .mm-rule-draw {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Smooth scrolling only where motion is welcome. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
-    @apply antialiased;
-    background: var(--color-dark-bg);
-    color: var(--color-text-primary);
-    font-family:
-      "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      sans-serif;
+    background-color: var(--mm-bg);
+    color: var(--mm-text);
+    font-family: var(--mm-font-text);
+    font-size: var(--mm-fs-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  /* Typography Enhancements */
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
-    color: var(--color-text-primary);
-    letter-spacing: -0.02em;
+  /* Headings carry their own weight. No eyebrow labels needed above them. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--mm-font-display);
+    font-weight: 800;
+    letter-spacing: var(--mm-track-tight);
+    line-height: 1.06;
+    text-wrap: balance;
+    color: var(--mm-text);
   }
 
   h1 {
-    @apply text-4xl sm:text-5xl lg:text-6xl;
-    line-height: 1.1;
+    font-size: var(--mm-fs-h1);
+    font-weight: 900;
+    letter-spacing: var(--mm-track-display);
+    line-height: 0.94;
   }
 
   h2 {
-    @apply text-3xl sm:text-4xl lg:text-5xl;
-    line-height: 1.2;
+    font-size: var(--mm-fs-h2);
+    letter-spacing: var(--mm-track-display);
+    line-height: 0.98;
   }
 
   h3 {
-    @apply text-2xl sm:text-3xl;
+    font-size: var(--mm-fs-h3);
   }
 
   p {
-    @apply leading-relaxed;
-    color: var(--color-text-secondary);
+    color: var(--mm-text-muted);
+    max-width: var(--mm-measure);
+    text-wrap: pretty;
   }
 
+  /* Links inherit the type rather than fighting it. */
   a {
-    @apply transition-all duration-200;
-    color: var(--color-text-primary);
+    color: inherit;
+    text-decoration: none;
   }
 
-  a:hover {
-    color: var(--color-vibrant);
+  /* ---------------------------------------------------------------------
+     FOCUS — one visible ring, the same everywhere.
+     The incumbent site had NO visible focus on links, and a ring on the
+     contact inputs that resolved to no CSS at all. This is the fix.
+     --------------------------------------------------------------------- */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--mm-accent);
+    outline-offset: 3px;
+    border-radius: var(--mm-radius);
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Browser surfaces belong to the design too. */
+  ::selection {
+    background-color: var(--mm-accent);
+    color: var(--mm-bg);
+  }
+
+  ::placeholder {
+    color: var(--mm-text-muted);
+    opacity: 1;
+  }
+
+  /* The accent caret, so even the text cursor is part of the system. */
+  input,
+  textarea {
+    caret-color: var(--mm-accent);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--mm-line);
   }
 }
 
+/* ==========================================================================
+   COMPONENTS
+   Only what is genuinely cleaner as CSS than as utilities.
+   ========================================================================== */
 @layer components {
-  /* Section Spacing - Adjust these values to control all section padding */
-  .section-padding {
-    @apply py-12;  /* Change this value: py-8 (small), py-12 (medium), py-16 (large) */
+  /* --- layout ------------------------------------------------------------ */
+  .mm-shell {
+    width: 100%;
+    max-width: 1600px;
+    margin-inline: auto;
+    padding-inline: var(--mm-gutter);
   }
 
-  .section-sm {
-    @apply py-8 sm:py-12;
+  .mm-section {
+    padding-block: var(--mm-section);
   }
 
-  .section-md {
-    @apply py-12 sm:py-16;
+  .mm-section-lg {
+    padding-block: var(--mm-section-lg);
   }
 
-  .section-lg {
-    @apply py-16 sm:py-20;
+  /* --- structural rules --------------------------------------------------
+     Rules, not boxes. This is what replaces the incumbent's card grid. ----- */
+  .mm-rule {
+    height: 1px;
+    width: 100%;
+    background-color: var(--mm-line);
+    border: 0;
   }
 
-  /* Vibrant Button Styles */
-  .btn-vibrant {
-    @apply px-6 py-3 rounded-full font-semibold transition-all duration-300;
-    background: var(--color-vibrant);
-    color: var(--color-dark-bg);
-    box-shadow: var(--shadow-glow-sm);
+  .mm-rule-strong {
+    background-color: var(--mm-line-control);
   }
 
-  .btn-vibrant:hover {
-    @apply scale-105;
-    box-shadow: var(--shadow-glow);
-    background: var(--color-vibrant-glow);
-    color: white;
+  /* --- typography helpers ------------------------------------------------ */
+  .mm-label {
+    font-family: var(--mm-font-mono);
+    font-size: var(--mm-fs-mono);
+    font-weight: 400;
+    letter-spacing: var(--mm-track-label);
+    text-transform: uppercase;
+    color: var(--mm-text-muted);
   }
 
-  .btn-vibrant:active {
-    @apply scale-95;
+  .mm-index {
+    font-family: var(--mm-font-mono);
+    font-size: var(--mm-fs-mono);
+    font-weight: 400;
+    letter-spacing: var(--mm-track-label);
+    color: var(--mm-accent);
+    font-variant-numeric: tabular-nums;
   }
 
-  .btn-outline-vibrant {
-    @apply px-6 py-3 rounded-full font-semibold transition-all duration-300;
-    border: 2px solid var(--color-vibrant);
-    color: var(--color-vibrant);
-    background: transparent;
+  .mm-display {
+    font-family: var(--mm-font-display);
+    font-size: var(--mm-fs-display);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: var(--mm-track-display);
+    color: var(--mm-text);
+    text-wrap: balance;
   }
 
-  .btn-outline-vibrant:hover {
-    background: var(--color-vibrant);
-    color: var(--color-dark-bg);
-    box-shadow: var(--shadow-glow-sm);
+  .mm-mono {
+    font-family: var(--mm-font-mono);
+    font-variant-numeric: tabular-nums;
   }
 
-  /* Light Card on Dark Background */
-  .card-light {
-    @apply rounded-2xl p-6 transition-all duration-300;
-    background: var(--color-light-card);
-    border: 1px solid var(--color-light-border);
-    box-shadow: var(--shadow-card);
+  /* --- the accent rule under a hover target -----------------------------
+     The site's single interaction signature. Scales from the left. ------- */
+  .mm-underline {
+    position: relative;
+    display: inline-block;
   }
 
-  .card-light:hover {
-    @apply -translate-y-1;
-    box-shadow: var(--shadow-card-hover);
+  .mm-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.15em;
+    height: 2px;
+    width: 100%;
+    background-color: var(--mm-accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--mm-dur) var(--mm-ease);
   }
 
-  /* Dark Card */
-  .card-dark {
-    @apply rounded-2xl p-6 transition-all duration-300;
-    background: var(--color-dark-card);
-    border: 1px solid var(--color-dark-border);
+  .mm-underline:hover::after,
+  .mm-underline:focus-visible::after,
+  .mm-underline[data-active="true"]::after {
+    transform: scaleX(1);
   }
 
-  .card-dark:hover {
-    @apply -translate-y-1;
-    border-color: var(--color-vibrant);
+  /* --- buttons ----------------------------------------------------------
+     Square-ish. One accent fill per viewport. Label sits on near-black at
+     16.10:1. Labels are 1-3 words so they never wrap at desktop. --------- */
+  .mm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    padding: 1rem 1.75rem;
+    border-radius: var(--mm-radius);
+    border: 1px solid transparent;
+    font-family: var(--mm-font-text);
+    font-size: var(--mm-fs-small);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background-color var(--mm-dur-fast) var(--mm-ease),
+      border-color var(--mm-dur-fast) var(--mm-ease),
+      color var(--mm-dur-fast) var(--mm-ease);
   }
 
-  /* Glassmorphism Effect */
-  .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  .mm-btn-accent {
+    background-color: var(--mm-accent-fill);
+    color: #ffffff;
   }
 
-  /* Text Gradient for Headings */
-  .text-gradient {
-    background: linear-gradient(
-      135deg,
-      var(--color-text-primary) 0%,
-      var(--color-text-secondary) 100%
+  .mm-btn-accent:hover {
+    background-color: var(--mm-accent-fill-dim);
+  }
+
+  .mm-btn-accent:active {
+    transform: translateY(1px);
+  }
+
+  .mm-btn-ghost {
+    background-color: transparent;
+    border-color: var(--mm-line-control);
+    color: var(--mm-text);
+  }
+
+  .mm-btn-ghost:hover {
+    border-color: var(--mm-accent);
+    color: var(--mm-accent);
+  }
+
+  .mm-btn-ghost:active {
+    transform: translateY(1px);
+  }
+
+  .mm-btn[disabled],
+  .mm-btn[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* --- chips ------------------------------------------------------------- */
+  .mm-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--mm-line);
+    border-radius: var(--mm-radius);
+    font-family: var(--mm-font-mono);
+    font-size: var(--mm-fs-mono);
+    color: var(--mm-text-muted);
+    white-space: nowrap;
+  }
+
+  /* --- forms -------------------------------------------------------------
+     Inputs are surface, text is primary (15.30:1), focus is a real 2px accent
+     ring. The incumbent's ring produced no CSS at all. ------------------- */
+  .mm-field {
+    display: block;
+    width: 100%;
+    padding: 0.9rem 1rem;
+    background-color: var(--mm-surface);
+    border: 1px solid var(--mm-line);
+    border-radius: var(--mm-radius);
+    color: var(--mm-text);
+    font-family: var(--mm-font-text);
+    font-size: var(--mm-fs-body);
+    transition: border-color var(--mm-dur-fast) var(--mm-ease);
+  }
+
+  .mm-field:hover {
+    border-color: var(--mm-line-control);
+  }
+
+  .mm-field:focus {
+    outline: none;
+    border-color: var(--mm-accent);
+    box-shadow: 0 0 0 2px var(--mm-accent);
+  }
+
+  .mm-field[aria-invalid="true"] {
+    border-color: var(--mm-danger);
+  }
+
+  /* --- reveal ------------------------------------------------------------
+     Visible by DEFAULT. Motion is additive. The incumbent started content at
+     opacity:0, which makes it permanently invisible if JS never runs. ----- */
+  .mm-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mm-reveal[data-armed="true"] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity var(--mm-dur-slow) var(--mm-ease),
+        transform var(--mm-dur-slow) var(--mm-ease);
+    }
+
+    .mm-reveal[data-armed="true"][data-visible="true"] {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* --- line reveal: the site's one authored entrance moment -------------
+     Applied to section headings. Each direct child is one line, so the AUTHOR
+     controls the breaks rather than a measurement script guessing at them.
+     No word-by-word or letter-by-letter splitting: that reads as a demo reel
+     rather than as an engineer's site, and it breaks on reflow. ------------ */
+  .mm-reveal-lines > * {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mm-reveal-lines[data-armed="true"] > * {
+      opacity: 0;
+      transform: translateY(0.55em);
+      transition:
+        opacity var(--mm-dur-slow) var(--mm-ease),
+        transform var(--mm-dur-slow) var(--mm-ease);
+    }
+
+    .mm-reveal-lines[data-armed="true"][data-visible="true"] > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered so lines arrive in reading order. */
+    .mm-reveal-lines[data-visible="true"] > *:nth-child(1) { transition-delay: 0ms; }
+    .mm-reveal-lines[data-visible="true"] > *:nth-child(2) { transition-delay: 70ms; }
+    .mm-reveal-lines[data-visible="true"] > *:nth-child(3) { transition-delay: 140ms; }
+    .mm-reveal-lines[data-visible="true"] > *:nth-child(4) { transition-delay: 210ms; }
+  }
+
+  /* ======================================================================
+     SCROLL-LINKED MOTION
+     One effect tracks scroll progress: the section rule drawing itself.
+
+     IMPLEMENTED WITH A TRANSITION, NOT `animation-timeline: view()`.
+
+     An earlier version used CSS scroll-driven animations. They parsed and
+     reported a valid timeline, but `getComputedTiming().progress` stayed pinned
+     at 0.5 across 1400px of scroll, so the animation never actually advanced.
+     A scroll effect that silently does nothing is worse than no effect, and it
+     is invisible in review because the element still exists and still reports a
+     running animation.
+
+     So the rule now uses the same IntersectionObserver + transition path as the
+     rest of the site's reveals, which is verified working. Same visual result,
+     predictable behaviour, one mechanism instead of two.
+     ====================================================================== */
+  .mm-rule-draw {
+    transform-origin: left center;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mm-rule-draw[data-armed="true"] {
+      transform: scaleX(0);
+      transition: transform var(--mm-dur-slow) var(--mm-ease);
+    }
+
+    .mm-rule-draw[data-armed="true"][data-visible="true"] {
+      transform: scaleX(1);
+    }
+  }
+
+  /* --- marquee: at most ONE per page ------------------------------------ */
+  .mm-marquee {
+    overflow: hidden;
+    border-block: 1px solid var(--mm-line);
+    padding-block: 1.25rem;
+  }
+
+  .mm-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: mm-scroll 40s linear infinite;
+  }
+
+  .mm-marquee:hover .mm-marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes mm-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* --- plates: images, framed only by the radius ------------------------ */
+  .mm-plate {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--mm-radius);
+    background-color: var(--mm-surface);
+  }
+  .mm-plate img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* --- cut-outs: a figure on transparency, NOT a framed image -----------
+     No background colour, no radius, no overflow clip. The previous version
+     reused `.mm-plate`, whose `background-color: var(--mm-surface)` rendered as
+     a visible rectangle around a transparent portrait. ---------------------- */
+  .mm-cutout {
+    position: relative;
+    background-color: transparent;
+    border-radius: 0;
+  }
+
+  .mm-cutout img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* ======================================================================
+     PHONE FRAME
+     A CSS device bezel, used to present portrait app screenshots as apps rather
+     than as tall images.
+
+     RADIUS IS A DELIBERATE, CONTAINED EXCEPTION. The system uses one 2px radius
+     for page plates, and that stays true everywhere else. A phone with 2px
+     corners would read as a rendering bug rather than as a device, so this one
+     component uses physical-object radii and nothing else does.
+     ====================================================================== */
+  .mm-phone-body {
+    position: relative;
+    padding: 7px;
+    border-radius: 26px;
+    background: linear-gradient(160deg, #2b3442 0%, #161c25 55%, #0f141b 100%);
+    border: 1px solid var(--mm-line-control);
+    /* Tinted to the page ground rather than pure black, so it sits on the page. */
+    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.75);
+  }
+
+  .mm-phone-speaker {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34px;
+    height: 3px;
+    border-radius: 999px;
+    background-color: var(--mm-line-control);
+    opacity: 0.7;
+    z-index: 1;
+  }
+
+  .mm-phone-screen {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    background-color: var(--mm-surface);
+  }
+
+  /* ======================================================================
+     POINTER-REACTIVE LAYER
+     Three effects, all driven by CSS custom properties written on
+     requestAnimationFrame by src/hooks/usePointerVars.js. React never
+     re-renders on pointer movement.
+
+     Every effect here DEFAULTS TO OFF. The variables are only ever set when a
+     fine pointer exists AND reduced motion is not requested, so touch devices
+     and motion-sensitive users get the static version with no extra branch.
+     ====================================================================== */
+
+  /* --- 1. ambient light on the page ground ------------------------------
+     A single fixed radial gradient at the pointer position. It sits BEHIND all
+     content and is `pointer-events: none`, so it can never intercept a click.
+     `display: none` by default keeps it entirely out of the compositing stack
+     until the hook sets the variables. -------------------------------------- */
+  .mm-ambient {
+    display: none;
+  }
+
+  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .mm-ambient {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        620px circle at var(--mm-px, 50%) var(--mm-py, 30%),
+        color-mix(in srgb, var(--mm-accent) 7%, transparent),
+        transparent 62%
+      );
+    }
+  }
+
+  /* --- 2. spotlight border on a plate -----------------------------------
+     A 1px ring whose opacity peaks under the cursor. Uses a mask so only the
+     border is painted, not a filled wash. ----------------------------------- */
+  .mm-spotlight {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--mm-radius);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--mm-dur) var(--mm-ease);
+    background: radial-gradient(
+      180px circle at var(--mm-local-x, 50%) var(--mm-local-y, 50%),
+      color-mix(in srgb, var(--mm-accent) 55%, transparent),
+      transparent 70%
     );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    padding: 1px;
   }
 
-  /* Vibrant Text Highlight */
-  .text-vibrant {
-    color: var(--color-vibrant);
+  .mm-tilt:hover .mm-spotlight,
+  .mm-tilt:focus-within .mm-spotlight {
+    opacity: 1;
   }
 
-  .text-vibrant-glow {
-    color: var(--color-vibrant);
-    text-shadow: 0 0 20px rgba(26, 115, 232, 0.6);
+  /* --- 3. tilt ----------------------------------------------------------
+     1.2deg maximum. The plate holds a real screenshot, and a bigger tilt would
+     make the interface inside it harder to read, which defeats showing it. --- */
+  .mm-tilt-inner {
+    transform-style: preserve-3d;
+    transition: transform var(--mm-dur-slow) var(--mm-ease);
   }
 
-  /* Smooth Reveal Animation */
-  .reveal {
-    @apply opacity-0 translate-y-8 transition-all duration-700;
-  }
-
-  .reveal.active {
-    @apply opacity-100 translate-y-0;
-  }
-
-  /* Pulse Animation for CTAs */
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 10px rgba(190, 255, 85, 0.2);
-    }
-    50% {
-      box-shadow: 0 0 25px rgba(190, 255, 85, 0.4);
+  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .mm-tilt:hover .mm-tilt-inner {
+      transform: perspective(1100px) rotateX(var(--mm-ty, 0deg)) rotateY(var(--mm-tx, 0deg))
+        translate3d(0, -3px, 0);
     }
   }
 
-  .pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+  /* --- 4. pointer-following light on a list row -------------------------
+     For the project index, where every row looks identical at rest. The light
+     answers "which row am I about to open?" instantly. --------------------- */
+  .mm-pointer-row::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--mm-dur) var(--mm-ease);
+    background: radial-gradient(
+      420px circle at var(--mm-local-x, 50%) var(--mm-local-y, 50%),
+      color-mix(in srgb, var(--mm-accent) 9%, transparent),
+      transparent 68%
+    );
   }
 
-  /* Floating Animation */
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
+  .mm-pointer-row:hover::before,
+  .mm-pointer-row:focus-visible::before {
+    opacity: 1;
   }
 
-  .float {
-    animation: float 3s ease-in-out infinite;
+  /* The row content must sit above its own light layer. */
+  .mm-pointer-row > * {
+    position: relative;
   }
 
-  /* Section Spacing */
-  .section {
-    @apply py-12 sm:py-16 lg:py-20;
+  /* --- skip link --------------------------------------------------------- */
+  .mm-skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: var(--mm-z-overlay);
+    padding: 0.75rem 1rem;
+    background-color: var(--mm-accent);
+    color: var(--mm-bg);
+    font-weight: 600;
   }
 
-  .section-sm {
-    @apply py-12 sm:py-16;
-  }
-
-  /* Container Max Width */
-  .container-custom {
-    @apply mx-auto px-4 sm:px-6 lg:px-8;
-    max-width: 1280px;
-  }
-
-  /* Muted Text */
-  .muted {
-    color: var(--color-text-muted);
-  }
-
-  /* Surface (for compatibility) */
-  .surface {
-    @apply card-dark;
-  }
-
-  /* Skill Badge */
-  .skill-badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
-      transition-all duration-200;
-    background: var(--color-dark-card);
-    color: var(--color-vibrant);
-    border: 1px solid var(--color-dark-border);
-  }
-
-  .skill-badge:hover {
-    background: var(--color-vibrant);
-    color: var(--color-dark-bg);
-    border-color: var(--color-vibrant);
-  }
-
-  /* Project Thumbnail */
-  .project-thumbnail {
-    @apply rounded-xl overflow-hidden border transition-all duration-300;
-    border-color: var(--color-light-border);
-    aspect-ratio: 16 / 10;
-  }
-
-  .project-thumbnail:hover {
-    @apply scale-105;
-    box-shadow: var(--shadow-card-hover);
-  }
-
-  /* Accent Dot */
-  .accent-dot {
-    @apply inline-block w-2 h-2 rounded-full;
-    background: var(--color-vibrant);
-    box-shadow: var(--shadow-glow-sm);
+  .mm-skip:focus {
+    left: var(--mm-gutter);
+    top: 1rem;
   }
 }
 
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
 @layer utilities {
-  /* Custom Scrollbar */
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+  .mm-text-primary { color: var(--mm-text); }
+  .mm-text-muted { color: var(--mm-text-muted); }
+  .mm-text-accent { color: var(--mm-accent); }
+
+  .mm-bg { background-color: var(--mm-bg); }
+  .mm-bg-surface { background-color: var(--mm-surface); }
+  .mm-bg-raised { background-color: var(--mm-surface-raised); }
+  .mm-bg-accent { background-color: var(--mm-accent); }
+
+  .mm-border { border: 1px solid var(--mm-line); }
+  .mm-border-t { border-top: 1px solid var(--mm-line); }
+  .mm-border-b { border-bottom: 1px solid var(--mm-line); }
+
+  /* Display type that intentionally leaves the frame, clipped. */
+  .mm-bleed-right {
+    overflow: hidden;
   }
 
-  .scrollbar-thin::-webkit-scrollbar-track {
-    background: var(--color-dark-surface);
+  /* Scrollbar, themed from the palette. */
+  .mm-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+  .mm-scroll::-webkit-scrollbar-track { background: var(--mm-surface); }
+  .mm-scroll::-webkit-scrollbar-thumb {
+    background: var(--mm-line-control);
+    border-radius: var(--mm-radius);
+  }
+  .mm-scroll::-webkit-scrollbar-thumb:hover { background: var(--mm-accent-dim); }
+
+  .mm-scroll-x {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: var(--color-dark-border);
-    border-radius: 3px;
-  }
-
-  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: var(--color-vibrant);
-  }
+  .mm-snap-item { scroll-snap-align: start; }
 }
